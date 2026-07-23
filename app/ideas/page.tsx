@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Icon from "@/components/Icon";
-import Reveal from "@/components/Reveal";
-import CtaBanner from "@/components/CtaBanner";
+import type { CSSProperties } from "react";
+import JxCta from "@/components/JxCta";
 
 export const metadata: Metadata = {
   title: "Ideas & Jadvix Academy — Learn, Intern, Join the Team",
@@ -11,208 +10,156 @@ export const metadata: Metadata = {
   alternates: { canonical: "/ideas" },
 };
 
+const F = "var(--font-fraunces),Fraunces,serif";
+const MONO = "var(--font-plex-mono),'IBM Plex Mono',monospace";
+
+function Ic({ d }: { d: string[] }) {
+  return (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      {d.map((p, i) => (
+        <path key={i} d={p} />
+      ))}
+    </svg>
+  );
+}
+
 const STEPS = [
-  {
-    icon: "school",
-    title: "Learn & Train",
-    body: "Join Jadvix Academy to gain practical, job-ready skills in IT, digital marketing, design and more — taught by people who build for real clients.",
-    ring: "border-secondary shadow-[0_0_20px_rgba(0,101,145,0.4)]",
-  },
-  {
-    icon: "bookmark",
-    title: "Internship Opportunity",
-    body: "Apply your knowledge through hands-on internships and real-world projects, with dedicated mentorship from our delivery team.",
-    ring: "border-accent shadow-[0_0_20px_rgba(255,124,57,0.4)]",
-  },
-  {
-    icon: "group",
-    title: "Join the Team",
-    body: "Perform well during your internship and become part of the Jadvix professional team — contributing to client work across the UK and India.",
-    ring: "border-secondary shadow-[0_0_20px_rgba(0,101,145,0.4)]",
-  },
+  { num: "01", title: "Learn & Train", body: "Join Jadvix Academy for practical, job-ready skills in IT, marketing and design — taught by people who build for real clients.", d: ["M22 10 12 5 2 10l10 5 10-5z", "M6 12v5c0 1 3 2.5 6 2.5s6-1.5 6-2.5v-5"] },
+  { num: "02", title: "Internship Opportunity", body: "Apply your knowledge through hands-on internships and real-world projects, with dedicated mentorship from our delivery team.", d: ["M6 3h12v18l-6-4-6 4z"] },
+  { num: "03", title: "Join the Team", body: "Perform well and become part of the Jadvix professional team — contributing to client work across the UK and India.", d: ["M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2", "M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", "M23 21v-2a4 4 0 0 0-3-3.87", "M16 3.13a4 4 0 0 1 0 7.75"] },
 ];
+
+const chip: CSSProperties = { display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: 4 };
 
 export default function IdeasPage() {
   return (
-    <>
-      {/* Hero */}
-      <section className="relative overflow-hidden pt-20 pb-section-gap md:pt-24">
-        <div className="container-jx grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          <div className="z-10">
-            <p className="mb-6 inline-block rounded-full bg-secondary-container/10 px-4 py-1.5 text-label-md font-semibold text-secondary">
-              FUTURE FORWARD IDEAS
-            </p>
-            <h1 className="mb-8 text-display-lg text-primary">
-              Pioneering the Next <span className="text-secondary">Digital Frontier</span>
-            </h1>
-            <p className="mb-10 max-w-xl text-body-lg text-ink-muted">
-              At Jadvix, ideas are our primary currency. We don&apos;t just build software; we grow people and
-              products together — through our Academy, internships and in-house product lab.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/contact"
-                className="rounded-xl bg-primary px-8 py-4 text-headline-md text-white transition-all hover:shadow-xl"
-              >
-                Apply to Academy
-              </Link>
-              <Link
-                href="/products"
-                className="rounded-xl border-2 border-primary px-8 py-4 text-headline-md text-primary transition-all hover:bg-primary/5"
-              >
-                See Our Products
-              </Link>
-            </div>
+    <div style={{ background: "var(--bg)" }}>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        .id-btn-navy:hover{background:var(--navy-2)!important}
+        .id-btn-ghost:hover{border-color:var(--accent)!important;color:var(--accent)!important}
+        .id-step:hover{border-color:rgba(57,184,253,.5)!important}
+        @media(max-width:900px){.id-hero{grid-template-columns:1fr!important}.id-steps{grid-template-columns:1fr!important}.id-incubate{grid-template-columns:1fr!important}}
+      `,
+        }}
+      />
+
+      {/* HERO */}
+      <section className="id-hero" style={{ maxWidth: 1280, margin: "0 auto", padding: "80px 24px 70px", display: "grid", gridTemplateColumns: "1.1fr .9fr", gap: 56, alignItems: "center" }}>
+        <div>
+          <span style={chip}>Future Forward Ideas</span>
+          <h1 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(36px,4.6vw,60px)", lineHeight: 1.04, letterSpacing: "-.025em", margin: "24px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
+            Pioneering the next <span style={{ fontStyle: "italic", color: "var(--accent)" }}>digital frontier.</span>
+          </h1>
+          <p style={{ maxWidth: 520, margin: "22px 0 0", fontSize: 18, lineHeight: 1.6, color: "var(--ink-2)" }}>
+            At Jadvix, ideas are our primary currency. We don&apos;t just build software; we grow people and products together — through our Academy, internships and in-house product lab.
+          </p>
+          <div style={{ display: "flex", gap: 14, marginTop: 32, flexWrap: "wrap" }}>
+            <Link href="/contact" className="id-btn-navy" style={{ background: "var(--navy)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: 4 }}>Apply to Academy</Link>
+            <Link href="/products" className="id-btn-ghost" style={{ border: "1px solid var(--border)", color: "var(--ink)", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: 4, background: "var(--surface)" }}>See Our Products</Link>
           </div>
-          <div className="relative" aria-hidden="true">
-            <div className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-secondary-container/20 blur-[100px]" />
-            <div className="animate-floaty relative z-10 rounded-card-lg border border-outline-variant/30 bg-white/60 p-8 shadow-xl backdrop-blur">
-              <div className="relative aspect-square overflow-hidden rounded-2xl shadow-2xl">
-                <div className="absolute inset-0 bg-[linear-gradient(160deg,#00253e,#0b3b5c_50%,#006591)]" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(57,184,253,0.45),transparent_55%),radial-gradient(circle_at_75%_80%,rgba(255,124,57,0.4),transparent_50%)]" />
-                <div className="absolute inset-x-10 top-10 h-3 rounded-full bg-white/20" />
-                <div className="absolute inset-x-10 top-[72px] h-3 w-2/3 rounded-full bg-white/15" />
-                <div className="absolute inset-x-10 top-[104px] h-3 w-1/2 rounded-full bg-white/10" />
-                <Icon name="brain" className="absolute bottom-10 right-10 h-16 w-16 text-white/70" />
-              </div>
+        </div>
+        <div style={{ position: "relative" }} aria-hidden>
+          <div className="jx-float" style={{ border: "1px solid var(--border)", borderRadius: 4, background: "var(--surface)", boxShadow: "var(--shadow-lg)", padding: 20 }}>
+            <div style={{ position: "relative", aspectRatio: "1", borderRadius: 5, overflow: "hidden", background: "radial-gradient(120% 120% at 30% 25%,#0b3b5c,#00253e 60%,#006591)" }}>
+              <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 30% 25%,rgba(57,184,253,.45),transparent 55%),radial-gradient(circle at 75% 80%,rgba(255,124,57,.4),transparent 50%)" }} />
+              <div style={{ position: "absolute", left: 40, top: 40, right: 40, height: 11, borderRadius: 4, background: "rgba(255,255,255,.22)" }} />
+              <div style={{ position: "absolute", left: 40, top: 66, width: "66%", height: 11, borderRadius: 4, background: "rgba(255,255,255,.16)" }} />
+              <div style={{ position: "absolute", left: 40, top: 92, width: "48%", height: 11, borderRadius: 4, background: "rgba(255,255,255,.1)" }} />
+              <svg style={{ position: "absolute", right: 36, bottom: 36 }} width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z" />
+              </svg>
             </div>
           </div>
         </div>
       </section>
 
-      {/* How Jadvix Works — timeline */}
-      <section className="relative overflow-hidden bg-primary py-section-gap">
-        <div className="absolute left-1/4 top-0 h-[600px] w-[600px] rounded-full bg-secondary-container/10 blur-[150px]" aria-hidden="true" />
-        <div className="absolute bottom-0 right-1/4 h-[600px] w-[600px] rounded-full bg-accent/5 blur-[150px]" aria-hidden="true" />
-
-        <div className="container-jx relative z-10">
-          <div className="mb-20 text-center md:mb-24">
-            <h2 className="mb-6 text-display-md text-white">How Jadvix Works</h2>
-            <p className="mx-auto max-w-2xl text-body-lg text-on-primary-container">
-              Our progression model transforms talent into professionals — from foundational learning to real
-              organisational impact.
-            </p>
+      {/* HOW JADVIX WORKS */}
+      <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(120% 100% at 50% 0%,#0b3b5c,#00253e 60%,#001322)", color: "#fff" }}>
+        <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px)", backgroundSize: "28px 28px", opacity: 0.5 }} />
+        <div style={{ position: "relative", zIndex: 2, maxWidth: 1000, margin: "0 auto", padding: "90px 24px 100px" }}>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--sky)", fontWeight: 600 }}>The Progression Model</div>
+            <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(28px,3.6vw,44px)", letterSpacing: "-.02em", margin: "14px 0 12px" }}>How Jadvix works.</h2>
+            <p style={{ maxWidth: 560, margin: "0 auto", fontSize: 16, lineHeight: 1.6, color: "rgba(206,229,255,.8)" }}>We transform talent into professionals — from foundational learning to real organisational impact.</p>
           </div>
-
-          <div className="relative mx-auto max-w-4xl">
-            {/* Vertical line */}
-            <div
-              className="absolute left-8 h-full w-1 rounded-full bg-gradient-to-b from-secondary via-accent to-secondary opacity-30 md:left-1/2 md:-translate-x-1/2"
-              aria-hidden="true"
-            />
-            <ol className="space-y-16 md:space-y-28">
-              {STEPS.map((step, i) => {
-                const flip = i % 2 === 1;
-                return (
-                  <Reveal as="li" key={step.title} className="group relative flex items-start gap-6 md:items-center md:gap-8">
-                    {/* Card — alternating sides on desktop */}
-                    <div className={`order-2 flex-1 ${flip ? "md:order-3" : "md:order-1 md:text-right"}`}>
-                      <div className="rounded-card border border-on-primary-container/20 bg-white/[0.04] p-6 backdrop-blur transition-colors hover:border-secondary-container/50 md:p-8">
-                        <h3 className="mb-3 text-headline-lg text-white">
-                          <span className="mr-3 text-accent">0{i + 1}</span>
-                          {step.title}
-                        </h3>
-                        <p className="text-body-md text-on-primary-container">{step.body}</p>
-                      </div>
-                    </div>
-                    {/* Node */}
-                    <div className="order-1 shrink-0 md:order-2">
-                      <div className={`flex h-16 w-16 items-center justify-center rounded-full border-4 bg-primary transition-transform group-hover:scale-110 md:h-20 md:w-20 ${step.ring}`}>
-                        <Icon name={step.icon} className="h-8 w-8 text-white" />
-                      </div>
-                    </div>
-                    <div className={`hidden flex-1 md:block ${flip ? "md:order-1" : "md:order-3"}`} />
-                  </Reveal>
-                );
-              })}
-            </ol>
+          <div className="id-steps" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+            {STEPS.map((s) => (
+              <article key={s.num} className="id-step" style={{ border: "1px solid rgba(255,255,255,.14)", borderRadius: 4, background: "linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02))", backdropFilter: "blur(8px)", padding: 30, transition: "border-color .3s" }}>
+                <div style={{ width: 56, height: 56, display: "grid", placeItems: "center", borderRadius: 5, background: "rgba(255,255,255,.1)", color: "#fff", marginBottom: 20 }}>
+                  <Ic d={s.d} />
+                </div>
+                <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: ".12em", color: "var(--accent)", marginBottom: 6 }}>{s.num}</div>
+                <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 22, margin: "0 0 10px" }}>{s.title}</h3>
+                <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: "rgba(206,229,255,.8)" }}>{s.body}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Bento — incubating tomorrow */}
-      <section className="container-jx py-section-gap">
-        <div className="mb-16 flex flex-col justify-between gap-8 md:flex-row md:items-end">
-          <div className="max-w-xl">
-            <h2 className="mb-4 text-display-md text-primary">Incubating Tomorrow</h2>
-            <p className="text-body-lg text-ink-muted">
-              The core domains where our team and Academy interns are making a difference today.
-            </p>
+      {/* INCUBATING TOMORROW */}
+      <section style={{ maxWidth: 1280, margin: "0 auto", padding: "90px 24px" }}>
+        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 20, marginBottom: 40 }}>
+          <div>
+            <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(28px,3.4vw,42px)", letterSpacing: "-.02em", margin: "0 0 8px", color: "var(--ink)" }}>Incubating tomorrow.</h2>
+            <p style={{ margin: 0, maxWidth: 460, fontSize: 16, lineHeight: 1.6, color: "var(--ink-2)" }}>The core domains where our team and Academy interns are making a difference today.</p>
           </div>
-          <Link href="/services" className="group flex items-center gap-2 text-label-md font-semibold text-secondary transition-all hover:gap-4">
-            View All Services <Icon name="arrow-right" className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+          <Link href="/services" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: MONO, fontSize: 12.5, letterSpacing: ".05em", textTransform: "uppercase", fontWeight: 600, color: "var(--ink)", borderBottom: "2px solid var(--accent)", paddingBottom: 4 }}>
+            View all services
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
           </Link>
         </div>
-
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <Reveal className="md:col-span-2">
-            <article className="group relative h-full overflow-hidden rounded-card-lg bg-white p-8 shadow-card">
-              <div className="relative z-10">
-                <span className="mb-4 inline-block rounded-full bg-secondary/10 px-3 py-1 text-label-md font-semibold text-secondary">
-                  CORE TECH
-                </span>
-                <h3 className="mb-4 text-headline-lg text-primary">Cloud-Native Engineering</h3>
-                <p className="max-w-sm text-body-md text-ink-muted">
-                  Designing resilient, scalable infrastructures that grow with your ambition — from single sites
-                  to multi-region platforms.
-                </p>
-              </div>
-              <div className="absolute bottom-0 right-0 h-2/3 w-2/3 opacity-40 transition-opacity group-hover:opacity-80" aria-hidden="true">
-                <div className="h-full w-full rounded-tl-[100px] bg-[radial-gradient(circle_at_70%_70%,rgba(57,184,253,0.5),rgba(11,59,92,0.15))]" />
-                <Icon name="cloud" className="absolute bottom-8 right-8 h-16 w-16 text-secondary" />
-              </div>
-            </article>
-          </Reveal>
-
-          <Reveal>
-            <article className="flex h-full flex-col justify-between rounded-card-lg bg-secondary p-8 text-white shadow-card">
-              <div className="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/20">
-                <Icon name="brain" className="h-8 w-8" />
-              </div>
-              <div>
-                <h3 className="mb-2 text-headline-md">Applied AI</h3>
-                <p className="opacity-80">Turning smart automation and analytics into practical business tools.</p>
-              </div>
-            </article>
-          </Reveal>
-
-          <Reveal>
-            <article className="flex h-full flex-col items-center justify-center rounded-card-lg bg-surface-low p-8 text-center shadow-card">
-              <h3 className="mb-4 text-headline-md text-primary">Our Products</h3>
-              <p className="mb-6 text-body-md text-ink-muted">Tools built by Jadvix for the modern business.</p>
-              <Link href="/products" className="flex items-center gap-2 text-label-md font-bold text-secondary hover:gap-3">
-                Explore <Icon name="arrow-up-right" className="h-4 w-4" />
-              </Link>
-            </article>
-          </Reveal>
-
-          <Reveal className="md:col-span-2">
-            <article className="flex h-full flex-col items-center gap-8 rounded-card-lg border border-accent/10 bg-accent/5 p-8 shadow-card md:flex-row">
-              <div className="flex-1">
-                <h3 className="mb-4 text-headline-lg text-accent">Join the Jadvix Academy</h3>
-                <p className="mb-6 text-body-md text-ink-muted">
-                  Start your journey from learner to professional with our structured mentorship program.
-                </p>
-                <Link href="/contact" className="inline-block rounded-xl bg-accent px-6 py-3 text-label-md font-semibold text-white transition-transform hover:scale-[1.03]">
-                  Apply Now
-                </Link>
-              </div>
-              <div className="relative h-48 w-full flex-1 overflow-hidden rounded-2xl shadow-lg md:h-full" aria-hidden="true">
-                <div className="absolute inset-0 bg-[linear-gradient(135deg,#006591,#39b8fd)]" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.3),transparent_55%)]" />
-                <Icon name="school" className="absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 text-white/90" />
-              </div>
-            </article>
-          </Reveal>
+        <div className="id-incubate" style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 18 }}>
+          <article style={{ position: "relative", overflow: "hidden", border: "1px solid var(--border)", borderRadius: 4, background: "var(--surface)", boxShadow: "var(--shadow)", padding: 34, minHeight: 230 }}>
+            <span style={{ display: "inline-block", fontFamily: MONO, fontSize: 10.5, letterSpacing: ".12em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", background: "color-mix(in srgb,var(--teal) 12%,transparent)", padding: "5px 11px", borderRadius: 4 }}>Core Tech</span>
+            <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 26, letterSpacing: "-.01em", margin: "16px 0 10px", color: "var(--ink)" }}>Cloud-Native Engineering</h3>
+            <p style={{ maxWidth: 380, margin: 0, fontSize: 15, lineHeight: 1.6, color: "var(--ink-2)" }}>Designing resilient, scalable infrastructures that grow with your ambition — from single sites to multi-region platforms.</p>
+            <svg style={{ position: "absolute", right: 28, bottom: 24, color: "var(--sky)", opacity: 0.5 }} width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 .5-9 6 6 0 0 0-11.6-1.6A4 4 0 0 0 6 19z" /></svg>
+          </article>
+          <article style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", borderRadius: 4, background: "var(--teal)", color: "#fff", boxShadow: "var(--shadow)", padding: 30, minHeight: 230 }}>
+            <span style={{ width: 56, height: 56, display: "grid", placeItems: "center", borderRadius: 5, background: "rgba(255,255,255,.18)" }}>
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z" /></svg>
+            </span>
+            <div>
+              <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 22, margin: "0 0 6px" }}>Applied AI</h3>
+              <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.55, opacity: 0.85 }}>Turning smart automation and analytics into practical business tools.</p>
+            </div>
+          </article>
+          <article style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center", border: "1px solid var(--border)", borderRadius: 4, background: "var(--surface-2)", boxShadow: "var(--shadow)", padding: 34, minHeight: 200 }}>
+            <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 22, margin: "0 0 8px", color: "var(--ink)" }}>Our Products</h3>
+            <p style={{ margin: "0 0 16px", fontSize: 14.5, lineHeight: 1.55, color: "var(--ink-2)" }}>Tools built by Jadvix for the modern business.</p>
+            <Link href="/products" style={{ display: "inline-flex", alignItems: "center", gap: 7, fontWeight: 600, fontSize: 14, color: "var(--teal)" }}>
+              Explore
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17 17 7M8 7h9v9" /></svg>
+            </Link>
+          </article>
+          <article style={{ display: "flex", gap: 28, alignItems: "center", border: "1px solid color-mix(in srgb,var(--accent) 30%,transparent)", borderRadius: 4, background: "color-mix(in srgb,var(--accent) 7%,var(--surface))", boxShadow: "var(--shadow)", padding: 34, minHeight: 200 }}>
+            <div style={{ flex: 1 }}>
+              <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 24, letterSpacing: "-.01em", margin: "0 0 10px", color: "var(--accent)" }}>Join the Jadvix Academy</h3>
+              <p style={{ margin: "0 0 18px", fontSize: 15, lineHeight: 1.6, color: "var(--ink-2)" }}>Start your journey from learner to professional with our structured mentorship programme.</p>
+              <Link href="/contact" className="jx-lift" style={{ display: "inline-block", background: "var(--accent)", color: "#fff", fontWeight: 600, fontSize: 14, padding: "12px 24px", borderRadius: 4 }}>Apply Now</Link>
+            </div>
+            <div style={{ flex: "0 0 40%", position: "relative", aspectRatio: "4/3", borderRadius: 5, overflow: "hidden", background: "radial-gradient(120% 120% at 40% 30%,#006591,#39b8fd)" }} aria-hidden>
+              <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 70% 30%,rgba(255,255,255,.3),transparent 55%)" }} />
+              <svg style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)" }} width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 10 12 5 2 10l10 5 10-5z" />
+                <path d="M6 12v5c0 1 3 2.5 6 2.5s6-1.5 6-2.5v-5" />
+              </svg>
+            </div>
+          </article>
         </div>
       </section>
 
-      <CtaBanner
+      <JxCta
         title="Have an idea worth building?"
         body="Bring it to a team that designs, develops, promotes and secures — end to end."
+        primaryLabel="Get a Free Project Quote"
+        primaryHref="/contact"
         secondaryLabel="Meet the Academy"
         secondaryHref="/contact"
       />
-    </>
+    </div>
   );
 }

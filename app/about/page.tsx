@@ -1,181 +1,251 @@
 import type { Metadata } from "next";
-import Icon from "@/components/Icon";
-import Reveal from "@/components/Reveal";
-import CtaBanner from "@/components/CtaBanner";
+import Link from "next/link";
+import type { CSSProperties } from "react";
+import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "900"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-fraunces",
+});
+const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap", variable: "--font-inter" });
+const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500", "600"], display: "swap", variable: "--font-plex-mono" });
 
 export const metadata: Metadata = {
   title: "About Us — Full-Service IT Company in the UK & India",
   description:
-    "Jadvix is a full-service IT company with offices in Ruislip (UK) and Chennai (India). Learn about our vision, values and the journey behind our web, app, ecommerce and digital marketing services.",
+    "Jadvix is a full-service IT company with offices in Ruislip (UK) and Chennai (India). Our vision, foundations, journey and the leadership behind our web, app, ecommerce and digital marketing services.",
   alternates: { canonical: "/about" },
 };
 
-const FOUNDATIONS = [
-  {
-    icon: "layers",
-    tint: "bg-primary/5 text-primary",
-    title: "Holistic Integration",
-    body: "We don't just add features; we orchestrate harmony between technology, design and business goals.",
-  },
-  {
-    icon: "verified",
-    tint: "bg-secondary-container/10 text-secondary",
-    title: "Mastery & Expertise",
-    body: "Hands-on specialists delivering technical excellence without compromise on security.",
-    offset: true,
-  },
-  {
-    icon: "handshake",
-    tint: "bg-accent/10 text-accent",
-    title: "Impactful Partnership",
-    body: "We align our success with your results, building long-term value across every touchpoint.",
-  },
-  {
-    icon: "bolt",
-    tint: "bg-primary/5 text-primary",
-    title: "Agility",
-    body: "Rapid adaptation to market shifts while maintaining the stability your business depends on.",
-    offset: true,
-  },
-];
+/* Design-system tokens (light theme) ported from About.dc.html */
+const tokens = {
+  "--bg": "#f6f7fa",
+  "--surface": "#ffffff",
+  "--surface-2": "#f0f2f6",
+  "--border": "rgba(20,40,62,0.12)",
+  "--ink": "#141a22",
+  "--ink-2": "#44505e",
+  "--muted": "#7a8694",
+  "--navy": "#00253e",
+  "--teal": "#006591",
+  "--sky": "#39b8fd",
+  "--accent": "#ff7c39",
+  "--shadow": "0 1px 2px rgba(11,59,92,.06),0 10px 30px -12px rgba(11,59,92,.12)",
+  "--shadow-lg": "0 24px 60px -18px rgba(11,59,92,.22)",
+} as CSSProperties;
 
-const JOURNEY = [
-  {
-    label: "01",
-    color: "bg-primary",
-    title: "The Beginning — Chennai",
-    body: "Jadvix started in India with a simple mission: make professional websites, apps and digital marketing accessible to growing businesses.",
-  },
-  {
-    label: "02",
-    color: "bg-secondary-container",
-    title: "UK Expansion — Ruislip",
-    body: "We opened our UK office to serve local and international clients, operating as one team across two time zones.",
-    flip: true,
-  },
-  {
-    label: "03",
-    color: "bg-accent",
-    title: "Academy & Products",
-    body: "Jadvix Academy launched to train the next generation of talent, alongside our own product lab building tools like RotaPay.",
-  },
-];
+const F = "var(--font-fraunces),Fraunces,serif";
+const MONO = "var(--font-plex-mono),'IBM Plex Mono',monospace";
 
-const VISION_POINTS = [
+function Ic({ d, sw = 1.5 }: { d: string[]; sw?: number }) {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round">
+      {d.map((p, i) => (
+        <path key={i} d={p} />
+      ))}
+    </svg>
+  );
+}
+
+const VISION = [
   "Empowering businesses with practical, honest tech guidance.",
   "Integrating design, development, marketing and security at scale.",
   "Fostering a culture of relentless digital curiosity through our Academy.",
 ];
 
+const FOUNDATIONS = [
+  { title: "Holistic Integration", body: "We orchestrate harmony between technology, design and business goals — not just features.", d: ["M12 2 2 7l10 5 10-5z", "M2 17l10 5 10-5", "M2 12l10 5 10-5"] },
+  { title: "Mastery & Expertise", body: "Hands-on specialists delivering technical excellence without compromise on security.", d: ["M12 2l2.4 6.9L22 9l-5.6 4.5L18 21l-6-3.7L6 21l1.6-7.5L2 9l7.6-.1z"] },
+  { title: "Impactful Partnership", body: "We align our success with your results, building long-term value at every touchpoint.", d: ["M8 12 5.5 9.5a3 3 0 0 1 4-4L12 8l2.5-2.5a3 3 0 0 1 4 4L16 12", "m7 13 4 4 6-6"] },
+  { title: "Agility", body: "Rapid adaptation to market shifts while maintaining the stability you depend on.", d: ["M13 2 3 14h7l-1 8 10-12h-7z"] },
+];
+
+const JOURNEY = [
+  { label: "01", bg: "var(--navy)", title: "The Beginning — Chennai", body: "Jadvix started in India with a simple mission: make professional websites, apps and digital marketing accessible to growing businesses." },
+  { label: "02", bg: "var(--teal)", title: "UK Expansion — Ruislip", body: "We opened our UK office to serve local and international clients, operating as one team across two time zones." },
+  { label: "03", bg: "var(--accent)", title: "Academy & Products", body: "Jadvix Academy launched to train the next generation of talent, alongside our own product lab building tools like RotaPay." },
+];
+
+const TEAM = [
+  { name: "Jachin Raja", role: "CEO & Founder", photo: "/team/jachin.jpg" },
+  { name: "Negha Sharma", role: "Chief Marketing Officer", photo: "/team/nehasharma.jpg" },
+  { name: "Elavarasi Manoharan", role: "Chief Technical Officer", photo: "/team/elavarasi.jpg" },
+  { name: "Adv. Heavalin", role: "Legal Advisor", photo: "/team/heavalin.jpg" },
+];
+
+const eyebrow = (color: string): CSSProperties => ({
+  fontFamily: MONO,
+  fontSize: 12,
+  letterSpacing: ".16em",
+  textTransform: "uppercase",
+  color,
+  fontWeight: 600,
+});
+const h2Style: CSSProperties = { fontFamily: F, fontWeight: 600, fontSize: "clamp(28px,3.4vw,42px)", letterSpacing: "-.02em", margin: "14px 0 0", color: "var(--ink)" };
+
 export default function AboutPage() {
   return (
-    <>
-      {/* Hero */}
-      <section className="bg-[radial-gradient(circle_at_top_right,rgba(57,184,253,0.08),transparent),radial-gradient(circle_at_bottom_left,rgba(255,124,57,0.05),transparent)] px-0 pt-20 pb-section-gap md:pt-24">
-        <div className="container-jx text-center">
-          <p className="mb-6 inline-block rounded-full bg-secondary-container/10 px-4 py-1.5 text-label-md font-semibold text-secondary">
-            PIONEERING DIGITAL EVOLUTION
-          </p>
-          <h1 className="mx-auto mb-8 max-w-4xl text-display-lg text-primary">
-            Bridging Stability and <span className="text-accent">Innovation</span>.
-          </h1>
-          <p className="mx-auto max-w-2xl text-body-lg text-ink-muted">
-            Jadvix is a full-service IT company guiding businesses through digital transformation with bespoke
-            strategic craftsmanship — from our offices in the UK and India.
-          </p>
-        </div>
+    <div
+      className={`${fraunces.variable} ${inter.variable} ${plexMono.variable}`}
+      style={{ ...tokens, background: "var(--bg)", color: "var(--ink)", fontFamily: "var(--font-inter),system-ui,sans-serif" }}
+    >
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        .jx-card{transition:transform .3s,box-shadow .3s}
+        .jx-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+        .jx-btn{transition:transform .2s,background .2s}
+        .jx-btn-primary:hover{transform:translateY(-2px)}
+        .jx-btn-ghost:hover{background:rgba(255,255,255,.15)}
+        .jx-vision{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+        .jx-grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+        .jx-grid4.team{gap:22px}
+        @media(max-width:900px){.jx-vision{grid-template-columns:1fr;gap:36px}.jx-grid4{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:560px){.jx-grid4{grid-template-columns:1fr}}
+      `,
+        }}
+      />
+
+      {/* HERO */}
+      <section style={{ maxWidth: 900, margin: "0 auto", padding: "90px 24px 70px", textAlign: "center" }}>
+        <span style={{ display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: 4 }}>
+          Pioneering Digital Evolution
+        </span>
+        <h1 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(38px,5vw,64px)", lineHeight: 1.05, letterSpacing: "-.025em", margin: "24px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
+          Bridging stability and <span style={{ fontStyle: "italic", color: "var(--accent)" }}>innovation.</span>
+        </h1>
+        <p style={{ maxWidth: 640, margin: "22px auto 0", fontSize: 18, lineHeight: 1.6, color: "var(--ink-2)" }}>
+          Jadvix is a full-service IT company guiding businesses through digital transformation with bespoke strategic craftsmanship — from our offices in the UK and India.
+        </p>
       </section>
 
-      {/* Vision split */}
-      <section className="overflow-hidden bg-white py-section-gap">
-        <div className="container-jx grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          <Reveal>
-            <div className="group relative aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl" aria-hidden="true">
-              <div className="absolute inset-0 bg-[linear-gradient(140deg,#00253e,#0b3b5c_60%,#006591)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(57,184,253,0.35),transparent_50%),radial-gradient(circle_at_80%_75%,rgba(255,124,57,0.3),transparent_50%)] transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute left-[12%] top-[16%] h-28 w-28 rotate-45 rounded-2xl border border-white/20" />
-              <div className="absolute bottom-[14%] right-[14%] h-40 w-40 rotate-12 rounded-3xl border border-secondary-container/30" />
-              <Icon name="globe" className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 text-white/70" />
+      {/* VISION SPLIT */}
+      <section style={{ background: "var(--surface-2)" }}>
+        <div className="jx-vision" style={{ maxWidth: 1280, margin: "0 auto", padding: "90px 24px" }}>
+          <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", boxShadow: "var(--shadow-lg)", border: "1px solid var(--border)", borderRadius: 2, background: "radial-gradient(120% 120% at 30% 25%,#0b3b5c,#00253e)" }}>
+            <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(150deg,rgba(0,37,62,.75),rgba(0,101,145,.2) 55%,transparent)", opacity: 0.4 }} />
+            <div aria-hidden style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 82% 14%,rgba(57,184,253,.3),transparent 55%)", opacity: 0.4 }} />
+            <div style={{ position: "absolute", left: 18, bottom: 18, display: "flex", alignItems: "center", gap: 12, background: "rgba(255,255,255,.14)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,.3)", borderRadius: 6, padding: "12px 16px" }}>
+              <span style={{ fontFamily: F, fontWeight: 600, fontSize: 28, color: "#fff", lineHeight: 1 }}>2</span>
+              <span style={{ fontFamily: MONO, fontSize: 9, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.92)", lineHeight: 1.35 }}>
+                Countries
+                <br />
+                One team
+              </span>
             </div>
-          </Reveal>
-          <div className="lg:pl-8">
-            <h2 className="mb-6 text-headline-lg text-primary">Our Vision</h2>
-            <p className="mb-8 text-body-lg leading-relaxed text-ink-muted">
-              To be the definitive catalyst for digital growth — where businesses don&apos;t just keep up with
-              technology, they lead with it. We turn technological complexity into strategic clarity.
+          </div>
+          <div>
+            <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(28px,3.4vw,40px)", letterSpacing: "-.02em", margin: "0 0 16px", color: "var(--ink)" }}>Our vision</h2>
+            <p style={{ margin: "0 0 26px", fontSize: 17, lineHeight: 1.65, color: "var(--ink-2)" }}>
+              To be the definitive catalyst for digital growth — where businesses don&apos;t just keep up with technology, they lead with it. We turn technological complexity into strategic clarity.
             </p>
-            <ul className="space-y-4">
-              {VISION_POINTS.map((point) => (
-                <li key={point} className="flex items-start gap-3">
-                  <span className="mt-1 text-accent">
-                    <Icon name="check" className="h-5 w-5" strokeWidth={2.4} />
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              {VISION.map((v) => (
+                <div key={v} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+                  <span style={{ flexShrink: 0, color: "var(--accent)", marginTop: 2 }}>
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
                   </span>
-                  <span className="text-body-md text-ink">{point}</span>
-                </li>
+                  <span style={{ fontSize: 15.5, lineHeight: 1.55, color: "var(--ink)" }}>{v}</span>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Foundations */}
-      <section className="container-jx py-section-gap">
-        <div className="mb-16">
-          <h2 className="mb-4 text-headline-lg text-primary">Our Foundations</h2>
-          <p className="max-w-xl text-body-md text-ink-muted">
-            Four pillars that define our approach to every challenge and partnership.
-          </p>
+      {/* FOUNDATIONS */}
+      <section style={{ maxWidth: 1280, margin: "0 auto", padding: "90px 24px" }}>
+        <div style={{ marginBottom: 44 }}>
+          <div style={eyebrow("var(--teal)")}>Our Foundations</div>
+          <h2 style={h2Style}>Four pillars behind every partnership.</h2>
         </div>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="jx-grid4">
           {FOUNDATIONS.map((f) => (
-            <Reveal key={f.title} className={f.offset ? "lg:mt-8" : ""}>
-              <article className="h-full rounded-3xl border border-outline-variant/10 bg-white p-8 shadow-card transition-transform duration-300 hover:-translate-y-2">
-                <div className={`mb-6 flex h-16 w-16 items-center justify-center rounded-2xl ${f.tint}`}>
-                  <Icon name={f.icon} className="h-8 w-8" />
-                </div>
-                <h3 className="mb-4 text-headline-md text-primary">{f.title}</h3>
-                <p className="text-body-md text-ink-muted">{f.body}</p>
-              </article>
-            </Reveal>
+            <article key={f.title} className="jx-card" style={{ border: "1px solid var(--border)", borderRadius: 5, background: "var(--surface)", boxShadow: "var(--shadow)", padding: 28 }}>
+              <div style={{ width: 52, height: 52, display: "grid", placeItems: "center", borderRadius: 5, background: "color-mix(in srgb,var(--teal) 12%,transparent)", color: "var(--teal)", marginBottom: 18 }}>
+                <Ic d={f.d} />
+              </div>
+              <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 19, margin: "0 0 8px", color: "var(--ink)" }}>{f.title}</h3>
+              <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: "var(--ink-2)" }}>{f.body}</p>
+            </article>
           ))}
         </div>
       </section>
 
-      {/* Journey */}
-      <section className="bg-white py-section-gap">
-        <div className="container-jx">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-headline-lg text-primary">Our Journey</h2>
-            <p className="text-body-md text-ink-muted">A story of steady, strategic growth.</p>
+      {/* JOURNEY */}
+      <section style={{ background: "var(--surface-2)" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", padding: "90px 24px" }}>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(28px,3.4vw,42px)", letterSpacing: "-.02em", margin: "0 0 10px", color: "var(--ink)" }}>Our journey</h2>
+            <p style={{ margin: 0, fontSize: 16, color: "var(--ink-2)" }}>A story of steady, strategic growth.</p>
           </div>
-          <div className="relative mx-auto max-w-4xl">
-            <div className="absolute left-6 h-full w-0.5 bg-surface-high lg:left-1/2 lg:-translate-x-1/2" aria-hidden="true" />
-            <ol className="space-y-12 lg:space-y-20">
-              {JOURNEY.map((item) => (
-                <Reveal as="li" key={item.label} className="group relative flex items-start gap-6 lg:items-center">
-                  <div className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-bold text-white transition-transform group-hover:scale-110 ${item.color} ${item.flip ? "lg:order-2" : "lg:order-2"}`}>
-                    {item.label}
-                  </div>
-                  <div className={`flex-1 ${item.flip ? "lg:order-3 lg:pl-10" : "lg:order-1 lg:pr-10 lg:text-right"}`}>
-                    <h3 className="mb-2 text-headline-md text-primary">{item.title}</h3>
-                    <p className={`max-w-md text-body-md text-ink-muted ${item.flip ? "" : "lg:ml-auto"}`}>{item.body}</p>
-                  </div>
-                  <div className={`hidden flex-1 lg:block ${item.flip ? "lg:order-1" : "lg:order-3"}`} />
-                </Reveal>
-              ))}
-            </ol>
+          <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+            {JOURNEY.map((j) => (
+              <div key={j.label} style={{ display: "flex", gap: 22, alignItems: "flex-start" }}>
+                <span style={{ flexShrink: 0, width: 56, height: 56, display: "grid", placeItems: "center", borderRadius: 5, background: j.bg, color: "#fff", fontFamily: F, fontWeight: 700, fontSize: 20 }}>{j.label}</span>
+                <div style={{ border: "1px solid var(--border)", borderRadius: 5, background: "var(--surface)", boxShadow: "var(--shadow)", padding: "24px 26px", flex: 1 }}>
+                  <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 20, margin: "0 0 8px", color: "var(--ink)" }}>{j.title}</h3>
+                  <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: "var(--ink-2)" }}>{j.body}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <div className="pt-section-gap">
-        <CtaBanner
-          title="Ready to Evolve?"
-          body="Join the businesses across the UK and India that trust Jadvix with their digital growth."
-          secondaryLabel="How Jadvix Works"
-          secondaryHref="/ideas"
-        />
-      </div>
-    </>
+      {/* TEAM */}
+      <section style={{ maxWidth: 1280, margin: "0 auto", padding: "90px 24px" }}>
+        <div style={{ marginBottom: 44 }}>
+          <div style={eyebrow("var(--accent)")}>Leadership</div>
+          <h2 style={h2Style}>The people behind Jadvix.</h2>
+        </div>
+        <div className="jx-grid4 team">
+          {TEAM.map((m) => (
+            <article key={m.name} className="jx-card" style={{ display: "flex", flexDirection: "column", border: "1px solid var(--border)", borderRadius: 6, background: "var(--surface)", boxShadow: "var(--shadow)", overflow: "hidden" }}>
+              <div style={{ position: "relative", aspectRatio: "4/5", overflow: "hidden", background: "var(--surface-2)" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={m.photo} alt={m.name} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} />
+                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(to top,rgba(0,37,62,.34),transparent 46%)" }} />
+              </div>
+              <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", padding: 20 }}>
+                <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 19, margin: "0 0 6px", color: "var(--ink)" }}>{m.name}</h3>
+                <div style={{ fontFamily: MONO, fontSize: 11, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 600 }}>{m.role}</div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <div style={{ height: 60 }} />
+
+      {/* CTA */}
+      <section style={{ maxWidth: 1280, margin: "0 auto 90px", padding: "0 24px" }}>
+        <div style={{ position: "relative", overflow: "hidden", borderRadius: 4, background: "radial-gradient(120% 140% at 80% 0%,#0b3b5c,#00253e 60%,#001322)", color: "#fff", padding: "72px 56px", textAlign: "center" }}>
+          <div aria-hidden style={{ position: "absolute", top: "-30%", left: "50%", transform: "translateX(-50%)", width: 600, height: 400, background: "radial-gradient(circle,rgba(57,184,253,.28),transparent 62%)" }} />
+          <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px)", backgroundSize: "26px 26px", opacity: 0.5 }} />
+          <div style={{ position: "relative", zIndex: 2 }}>
+            <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(30px,4vw,50px)", lineHeight: 1.06, letterSpacing: "-.02em", margin: "0 auto 18px", maxWidth: 760, textWrap: "balance" } as CSSProperties}>
+              Ready to evolve?
+            </h2>
+            <p style={{ maxWidth: 560, margin: "0 auto 32px", fontSize: 17, lineHeight: 1.6, color: "rgba(206,229,255,.85)" }}>
+              Join the businesses across the UK and India that trust Jadvix with their digital growth.
+            </p>
+            <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+              <Link href="/contact" className="jx-btn jx-btn-primary" style={{ background: "var(--accent)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "15px 30px", borderRadius: 4, boxShadow: "0 14px 32px -8px rgba(255,124,57,.5)" }}>
+                Get a Free Project Quote
+              </Link>
+              <Link href="/ideas" className="jx-btn jx-btn-ghost" style={{ border: "1px solid rgba(255,255,255,.3)", background: "rgba(255,255,255,.07)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "15px 30px", borderRadius: 4 }}>
+                How Jadvix Works
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

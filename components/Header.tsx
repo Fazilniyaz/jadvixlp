@@ -3,94 +3,113 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import Logo from "@/components/Logo";
-import { NAV_LINKS } from "@/lib/site";
+import ThemeToggle from "@/components/ThemeToggle";
+
+const LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/products", label: "Products" },
+  { href: "/ideas", label: "Ideas" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
 
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-
-  // Close the mobile menu on navigation
   useEffect(() => setOpen(false), [pathname]);
 
+  const linkBase: React.CSSProperties = {
+    fontFamily: "var(--font-plex-mono),'IBM Plex Mono',monospace",
+    fontSize: 12.5,
+    letterSpacing: ".06em",
+    textTransform: "uppercase",
+  };
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-outline-variant/30 bg-surface/90 shadow-sm backdrop-blur-md">
-      <nav className="container-jx flex items-center justify-between py-4" aria-label="Main navigation">
-        <Link href="/" aria-label="Jadvix — home">
-          <Logo />
+    <header
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        background: "color-mix(in srgb,var(--surface) 82%,transparent)",
+        backdropFilter: "blur(14px)",
+        borderBottom: "1px solid var(--border)",
+      }}
+    >
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        html[data-theme="dark"] .jx-logo-on-light{display:none}
+        html:not([data-theme="dark"]) .jx-logo-on-dark{display:none}
+        .jx-navlink:hover{color:var(--ink)!important}
+        @media(max-width:860px){.jx-desktop-nav{display:none!important}.jx-burger{display:grid!important}}
+      `,
+        }}
+      />
+      <nav className="jx-wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24, paddingTop: 14, paddingBottom: 14 }}>
+        <Link href="/" aria-label="Jadvix — home" style={{ display: "flex", alignItems: "center" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/jadvix-logo.svg" alt="Jadvix" className="jx-logo-on-light" style={{ height: 30, display: "block" }} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/jadvix-logo-light.svg" alt="Jadvix" className="jx-logo-on-dark" style={{ height: 30, display: "block" }} />
         </Link>
 
-        <div className="hidden items-center gap-8 lg:flex">
-          {NAV_LINKS.map((link) => {
-            const active = pathname === link.href;
+        <div className="jx-desktop-nav" style={{ display: "flex", alignItems: "center", gap: 30 }}>
+          {LINKS.map((l) => {
+            const active = l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
             return (
               <Link
-                key={link.href}
-                href={link.href}
+                key={l.href}
+                href={l.href}
                 aria-current={active ? "page" : undefined}
-                className={
-                  active
-                    ? "border-b-2 border-accent pb-1 text-label-md font-bold text-primary"
-                    : "text-label-md font-semibold text-ink-muted transition-colors hover:text-primary"
-                }
+                className="jx-navlink"
+                style={{
+                  ...linkBase,
+                  fontWeight: active ? 600 : 500,
+                  color: active ? "var(--ink)" : "var(--ink-2)",
+                  borderBottom: active ? "2px solid var(--accent)" : "2px solid transparent",
+                  paddingBottom: 3,
+                }}
               >
-                {link.label}
+                {l.label}
               </Link>
             );
           })}
         </div>
 
-        <div className="flex items-center gap-3">
-          <Link
-            href="/contact"
-            className="hidden rounded-lg bg-primary px-6 py-2.5 text-label-md font-semibold text-white transition-all hover:opacity-90 active:scale-95 sm:block"
-          >
-            Get in Touch
-          </Link>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <ThemeToggle />
           <button
             type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-controls="mobile-menu"
+            className="jx-burger"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-lg lg:hidden"
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            style={{ display: "none", placeItems: "center", width: 38, height: 38, border: "1px solid var(--border)", borderRadius: 4, background: "var(--surface)", color: "var(--ink)", cursor: "pointer" }}
           >
-            <span className={`h-0.5 w-6 bg-primary transition-transform ${open ? "translate-y-2 rotate-45" : ""}`} />
-            <span className={`h-0.5 w-6 bg-primary transition-opacity ${open ? "opacity-0" : ""}`} />
-            <span className={`h-0.5 w-6 bg-primary transition-transform ${open ? "-translate-y-2 -rotate-45" : ""}`} />
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M3 6h18M3 12h18M3 18h18" />}
+            </svg>
           </button>
         </div>
       </nav>
 
       {/* Mobile menu */}
-      <div
-        id="mobile-menu"
-        className={`overflow-hidden border-t border-outline-variant/30 bg-surface transition-[max-height] duration-300 lg:hidden ${
-          open ? "max-h-[480px]" : "max-h-0 border-t-0"
-        }`}
-      >
-        <div className="container-jx flex flex-col gap-1 py-4">
-          {NAV_LINKS.map((link) => {
-            const active = pathname === link.href;
+      <div style={{ overflow: "hidden", maxHeight: open ? 360 : 0, transition: "max-height .3s ease", borderTop: open ? "1px solid var(--border)" : "none", background: "var(--surface)" }}>
+        <div className="jx-wrap" style={{ display: "flex", flexDirection: "column", gap: 4, paddingTop: 12, paddingBottom: 12 }}>
+          {LINKS.map((l) => {
+            const active = l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
             return (
               <Link
-                key={link.href}
-                href={link.href}
-                aria-current={active ? "page" : undefined}
-                className={`rounded-lg px-4 py-3 text-label-md font-semibold ${
-                  active ? "bg-primary/5 text-primary" : "text-ink-muted hover:bg-surface-low hover:text-primary"
-                }`}
+                key={l.href}
+                href={l.href}
+                style={{ ...linkBase, fontWeight: active ? 600 : 500, color: active ? "var(--ink)" : "var(--ink-2)", padding: "12px 4px", borderBottom: "1px solid var(--border)" }}
               >
-                {link.label}
+                {l.label}
               </Link>
             );
           })}
-          <Link
-            href="/contact"
-            className="mt-2 rounded-lg bg-primary px-4 py-3 text-center text-label-md font-semibold text-white sm:hidden"
-          >
-            Get in Touch
-          </Link>
         </div>
       </div>
     </header>

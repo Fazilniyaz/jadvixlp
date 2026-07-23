@@ -26,13 +26,13 @@ export default function CtaBanner({
             <div className="flex flex-col justify-center gap-4 sm:flex-row sm:gap-6">
               <Link
                 href="/contact"
-                className="rounded-xl bg-accent px-10 py-5 text-headline-md text-white shadow-xl shadow-orange-900/30 transition-transform hover:scale-105"
+                className="rounded-lg bg-accent px-7 py-3 text-base font-semibold text-white shadow-xl shadow-orange-900/30 transition-transform hover:scale-105"
               >
                 {primaryLabel}
               </Link>
               <Link
                 href={secondaryHref}
-                className="rounded-xl border border-white/20 bg-white/10 px-10 py-5 text-headline-md text-white backdrop-blur-md transition-colors hover:bg-white/20"
+                className="rounded-lg border border-white/20 bg-white/10 px-7 py-3 text-base font-semibold text-white backdrop-blur-md transition-colors hover:bg-white/20"
               >
                 {secondaryLabel}
               </Link>

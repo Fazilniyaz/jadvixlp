@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Icon from "@/components/Icon";
-import Reveal from "@/components/Reveal";
+import type { CSSProperties } from "react";
 import ContactForm from "@/components/ContactForm";
-import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact Us — Get a Free Project Quote (UK & India Offices)",
@@ -11,130 +9,138 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-const OFFICES = [
-  { key: "uk", office: SITE.offices.uk, badge: "United Kingdom", dark: true },
-  { key: "india", office: SITE.offices.india, badge: "India", dark: false },
-];
+const F = "var(--font-fraunces),Fraunces,serif";
+const MONO = "var(--font-plex-mono),'IBM Plex Mono',monospace";
+
+const chip: CSSProperties = { display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: 4 };
+const flagRow: CSSProperties = { display: "flex", alignItems: "center", gap: 9, fontFamily: MONO, fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", fontWeight: 600, marginBottom: 12 };
+
+function GlobeIc() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20" />
+    </svg>
+  );
+}
+function PhoneIc() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.2a2 2 0 0 1 2.1-.5c.8.4 1.7.6 2.6.7a2 2 0 0 1 1.7 2z" />
+    </svg>
+  );
+}
+function MailIc() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="m2 7 10 6 10-6" />
+    </svg>
+  );
+}
 
 export default function ContactPage() {
   return (
-    <>
-      {/* Hero */}
-      <section className="relative overflow-hidden pt-20 pb-12 md:pt-24">
-        <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-secondary-container/10 blur-3xl" aria-hidden="true" />
-        <div className="container-jx relative z-10 max-w-3xl">
-          <p className="mb-6 inline-block rounded-full bg-secondary-container/20 px-4 py-1.5 text-label-md font-semibold text-secondary">
-            LET&apos;S CONNECT
-          </p>
-          <h1 className="mb-6 text-display-md text-primary">
-            Let&apos;s build the <span className="text-accent">future</span> together.
-          </h1>
-          <p className="text-body-lg text-ink-muted">
-            Whether you need a new website, an app, an online store or ongoing digital marketing — our team in
-            the UK and India is ready to help. Get a free project quote today.
-          </p>
-        </div>
+    <div style={{ background: "var(--bg)" }}>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        .ct-uklink:hover{color:var(--sky)!important}
+        .ct-inlink:hover{color:var(--teal)!important}
+        .ct-channel:hover{transform:translateY(-6px);border-color:var(--accent)!important}
+        @media(max-width:900px){.ct-grid{grid-template-columns:1fr!important}.ct-channels{grid-template-columns:1fr!important}}
+      `,
+        }}
+      />
+
+      {/* HERO */}
+      <section style={{ margin: "0 auto", padding: "80px 24px 30px", maxWidth: 820 }}>
+        <span style={chip}>Let&apos;s Connect</span>
+        <h1 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(36px,4.6vw,58px)", lineHeight: 1.05, letterSpacing: "-.025em", margin: "22px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
+          Let&apos;s build the <span style={{ fontStyle: "italic", color: "var(--accent)" }}>future</span> together.
+        </h1>
+        <p style={{ maxWidth: 620, margin: "20px 0 0", fontSize: 18, lineHeight: 1.6, color: "var(--ink-2)" }}>
+          Whether you need a new website, an app, an online store or ongoing digital marketing — our team in the UK and India is ready to help. Get a free project quote today.
+        </p>
       </section>
 
-      {/* Form + office cards */}
-      <section className="container-jx flex flex-col gap-8 pb-section-gap lg:flex-row">
-        {/* Form */}
-        <div className="flex-grow lg:w-3/5">
-          <div className="rounded-card bg-white p-6 shadow-ambient md:p-12">
-            <h2 className="mb-2 text-headline-lg text-primary">Send us a Message</h2>
-            <p className="mb-8 text-body-md text-ink-muted">
-              Fill out the form and our team will reach out within one business day.
-            </p>
-            <ContactForm />
-          </div>
-        </div>
+      {/* FORM + OFFICES */}
+      <section className="ct-grid" style={{ maxWidth: 1280, margin: "0 auto", padding: "40px 24px 80px", display: "grid", gridTemplateColumns: "1.5fr 1fr", gap: 32, alignItems: "start" }}>
+        <ContactForm />
 
-        {/* Offices */}
-        <aside className="space-y-6 lg:w-2/5">
-          {OFFICES.map(({ key, office, badge, dark }) => (
-            <Reveal key={key}>
-              <div
-                className={`group relative overflow-hidden rounded-card p-8 ${
-                  dark ? "bg-primary text-white" : "border border-outline-variant/30 bg-surface-high/60"
-                }`}
-              >
-                <div className="absolute right-0 top-0 p-4 opacity-10" aria-hidden="true">
-                  <Icon name="pin" className="h-28 w-28 transition-transform duration-500 group-hover:scale-110" />
-                </div>
-                <div className="relative z-10">
-                  <div className={`mb-4 flex items-center gap-2 ${dark ? "text-on-primary-container" : "text-secondary"}`}>
-                    <Icon name="globe" className="h-5 w-5" />
-                    <span className="text-label-md font-semibold uppercase tracking-widest">{badge}</span>
-                  </div>
-                  <h3 className={`mb-4 text-headline-lg ${dark ? "" : "text-primary"}`}>{office.title}</h3>
-                  <address className={`mb-6 not-italic leading-relaxed text-body-md ${dark ? "text-on-primary-container" : "text-ink-muted"}`}>
-                    {office.lines.map((line) => (
-                      <span key={line} className="block">
-                        {line}
-                      </span>
-                    ))}
-                  </address>
-                  <div className="space-y-3">
-                    <a href={office.phoneHref} className={`flex items-center gap-4 font-semibold transition-colors ${dark ? "hover:text-secondary-container" : "text-primary hover:text-secondary"}`}>
-                      <span className={`flex h-10 w-10 items-center justify-center rounded-lg ${dark ? "bg-primary-container" : "bg-white shadow-sm"}`}>
-                        <Icon name="phone" className="h-5 w-5" />
-                      </span>
-                      {office.phone}
-                    </a>
-                    <a href={`mailto:${SITE.email}`} className={`flex items-center gap-4 font-semibold transition-colors ${dark ? "hover:text-secondary-container" : "text-primary hover:text-secondary"}`}>
-                      <span className={`flex h-10 w-10 items-center justify-center rounded-lg ${dark ? "bg-primary-container" : "bg-white shadow-sm"}`}>
-                        <Icon name="mail" className="h-5 w-5" />
-                      </span>
-                      {SITE.email}
-                    </a>
-                  </div>
-                  <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.mapQuery)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`mt-8 flex w-full items-center justify-center gap-2 rounded-lg border-2 py-3 text-label-md font-semibold transition-colors ${
-                      dark
-                        ? "border-white/30 text-white hover:bg-white/10"
-                        : "border-primary text-primary hover:bg-primary hover:text-white"
-                    }`}
-                  >
-                    <Icon name="pin" className="h-4 w-4" /> View on Google Maps
-                  </a>
-                </div>
+        <aside style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          {/* UK */}
+          <div style={{ position: "relative", overflow: "hidden", borderRadius: 4, background: "radial-gradient(120% 120% at 85% 0%,#0b3b5c,#00253e)", color: "#fff", padding: 30 }}>
+            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 85% 15%,rgba(57,184,253,.28),transparent 55%)" }} aria-hidden />
+            <div style={{ position: "relative" }}>
+              <div style={{ ...flagRow, color: "var(--sky)" }}>
+                <GlobeIc /> United Kingdom
               </div>
-            </Reveal>
-          ))}
+              <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 22, margin: "0 0 12px" }}>UK Office</h3>
+              <address style={{ fontStyle: "normal", fontSize: 14.5, lineHeight: 1.7, color: "rgba(206,229,255,.82)", margin: "0 0 16px" }}>
+                2nd Floor, College House
+                <br />
+                17 King Edwards Rd, Ruislip
+                <br />
+                United Kingdom, HA4 7AE
+              </address>
+              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                <a href="tel:+447355803386" className="ct-uklink" style={{ display: "flex", alignItems: "center", gap: 12, color: "#fff", fontWeight: 600, fontSize: 14.5 }}>
+                  <span style={{ width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: 4, background: "rgba(255,255,255,.12)" }}><PhoneIc /></span>+44 7355 803386
+                </a>
+                <a href="mailto:contact@jadvix.uk" className="ct-uklink" style={{ display: "flex", alignItems: "center", gap: 12, color: "#fff", fontWeight: 600, fontSize: 14.5 }}>
+                  <span style={{ width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: 4, background: "rgba(255,255,255,.12)" }}><MailIc /></span>contact@jadvix.uk
+                </a>
+              </div>
+            </div>
+          </div>
+          {/* India */}
+          <div style={{ border: "1px solid var(--border)", borderRadius: 4, background: "var(--surface)", boxShadow: "var(--shadow)", padding: 30 }}>
+            <div style={{ ...flagRow, color: "var(--teal)" }}>
+              <GlobeIc /> India
+            </div>
+            <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 22, margin: "0 0 12px", color: "var(--ink)" }}>India Office</h3>
+            <address style={{ fontStyle: "normal", fontSize: 14.5, lineHeight: 1.7, color: "var(--ink-2)", margin: "0 0 16px" }}>
+              No 19/35, 1st Floor, Mount Road
+              <br />
+              Little Mount, Saidapet, Chennai
+              <br />
+              Tamil Nadu, India, 600 015
+            </address>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <a href="tel:+919489644108" className="ct-inlink" style={{ display: "flex", alignItems: "center", gap: 12, color: "var(--ink)", fontWeight: 600, fontSize: 14.5 }}>
+                <span style={{ width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: 4, background: "var(--surface-2)" }}><PhoneIc /></span>+91 94896 44108
+              </a>
+              <a href="mailto:contact@jadvix.uk" className="ct-inlink" style={{ display: "flex", alignItems: "center", gap: 12, color: "var(--ink)", fontWeight: 600, fontSize: 14.5 }}>
+                <span style={{ width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: 4, background: "var(--surface-2)" }}><MailIc /></span>contact@jadvix.uk
+              </a>
+            </div>
+          </div>
         </aside>
       </section>
 
-      {/* Direct channels */}
-      <section className="bg-surface-low py-20">
-        <div className="container-jx">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-headline-lg text-primary">Prefer a direct line?</h2>
-            <p className="text-body-md text-ink-muted">Reach the right team instantly.</p>
+      {/* DIRECT CHANNELS */}
+      <section style={{ background: "var(--surface-2)" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "80px 24px" }}>
+          <div style={{ textAlign: "center", marginBottom: 44 }}>
+            <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(26px,3.2vw,38px)", letterSpacing: "-.02em", margin: "0 0 8px", color: "var(--ink)" }}>Prefer a direct line?</h2>
+            <p style={{ margin: 0, fontSize: 16, color: "var(--ink-2)" }}>Reach the right team instantly.</p>
           </div>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+          <div className="ct-channels" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 18 }}>
             {[
-              { icon: "mail", label: "Email Us", value: SITE.email, href: `mailto:${SITE.email}` },
-              { icon: "phone", label: "Call UK", value: SITE.phoneUK, href: SITE.offices.uk.phoneHref },
-              { icon: "phone", label: "Call India", value: SITE.phoneIN, href: SITE.offices.india.phoneHref },
-            ].map((channel) => (
-              <a
-                key={channel.label}
-                href={channel.href}
-                className="group flex flex-col items-center gap-4 rounded-2xl border border-outline-variant/30 bg-white p-8 transition-all hover:-translate-y-2 hover:border-secondary-container"
-              >
-                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-secondary-container/10 text-secondary transition-all duration-300 group-hover:bg-secondary group-hover:text-white">
-                  <Icon name={channel.icon} className="h-7 w-7" />
-                </span>
-                <span className="text-label-md font-bold text-primary">{channel.label}</span>
-                <span className="text-body-md text-ink-muted">{channel.value}</span>
+              { label: "Email Us", value: "contact@jadvix.uk", href: "mailto:contact@jadvix.uk", icon: <MailIc /> },
+              { label: "Call UK", value: "+44 7355 803386", href: "tel:+447355803386", icon: <PhoneIc /> },
+              { label: "Call India", value: "+91 94896 44108", href: "tel:+919489644108", icon: <PhoneIc /> },
+            ].map((c) => (
+              <a key={c.label} href={c.href} className="ct-channel" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14, border: "1px solid var(--border)", borderRadius: 5, background: "var(--surface)", padding: 36, textAlign: "center", transition: "transform .3s,border-color .3s" }}>
+                <span style={{ width: 60, height: 60, display: "grid", placeItems: "center", borderRadius: "50%", background: "color-mix(in srgb,var(--teal) 12%,transparent)", color: "var(--teal)" }}>{c.icon}</span>
+                <span style={{ fontWeight: 700, fontSize: 15, color: "var(--ink)" }}>{c.label}</span>
+                <span style={{ fontSize: 14, color: "var(--ink-2)" }}>{c.value}</span>
               </a>
             ))}
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
