@@ -1,9 +1,21 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Icon from "@/components/Icon";
+import type { CSSProperties } from "react";
 
 export type FaqItem = { question: string; answer: string; category: string };
+
+const MONO = "var(--font-label),system-ui,sans-serif";
+const F = "var(--font-display),system-ui,sans-serif";
+
+function SearchIc() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="11" cy="11" r="7" />
+      <path d="M16.5 16.5L21 21" />
+    </svg>
+  );
+}
 
 export default function FaqAccordion({ items }: { items: FaqItem[] }) {
   const [query, setQuery] = useState("");
@@ -12,77 +24,78 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return items;
-    return items.filter(
-      (item) => item.question.toLowerCase().includes(q) || item.answer.toLowerCase().includes(q)
-    );
+    return items.filter((item) => item.question.toLowerCase().includes(q) || item.answer.toLowerCase().includes(q));
   }, [items, query]);
 
   const categories = useMemo(() => Array.from(new Set(filtered.map((i) => i.category))), [filtered]);
 
+  const catLabel: CSSProperties = { fontFamily: MONO, fontSize: 12, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 600 };
+
   return (
     <div>
-      {/* Search */}
-      <div className="group relative mb-12 max-w-2xl">
-        <span className="absolute left-5 top-1/2 -translate-y-1/2 text-outline transition-colors group-focus-within:text-secondary">
-          <Icon name="search" className="h-5 w-5" />
+      <div style={{ position: "relative", marginBottom: 40, maxWidth: 480 }}>
+        <span style={{ position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)", color: "var(--muted)" }} aria-hidden>
+          <SearchIc />
         </span>
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search FAQs, services or technical topics…"
+          placeholder="Search FAQs, services or topics…"
           aria-label="Search frequently asked questions"
-          className="w-full rounded-xl border border-outline-variant bg-white py-5 pl-14 pr-6 text-body-md shadow-sm transition-all focus:border-secondary-container focus:outline-none focus:ring-2 focus:ring-secondary-container/20"
+          style={{ width: "100%", padding: "13px 16px 13px 46px", borderRadius: "var(--radius-md)" }}
         />
       </div>
 
       {filtered.length === 0 && (
-        <p className="rounded-2xl border border-outline-variant/30 bg-white p-8 text-body-md text-ink-muted">
+        <p style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", padding: 24, fontSize: 15, color: "var(--ink-2)" }}>
           No results for &ldquo;{query}&rdquo;. Try a different term, or{" "}
-          <a href="/contact" className="font-semibold text-secondary underline">
-            ask us directly
-          </a>
-          .
+          <a href="/contact" style={{ fontWeight: 600, color: "var(--teal)", textDecoration: "underline" }}>ask us directly</a>.
         </p>
       )}
 
       {categories.map((category) => (
-        <div key={category} className="mb-12">
-          <div className="mb-8">
-            <h2 className="mb-3 text-headline-lg text-primary">{category}</h2>
-            <div className="h-1 w-20 rounded-full bg-accent" />
+        <div key={category} style={{ marginBottom: 40 }}>
+          <div style={{ marginBottom: 18, display: "flex", alignItems: "center", gap: 10 }}>
+            <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--accent)" }} />
+            <span style={catLabel}>{category}</span>
           </div>
-          <div className="space-y-4">
-            {filtered.map((item, index) => {
-              if (item.category !== category) return null;
-              const globalIndex = items.indexOf(item);
-              const open = openIndex === globalIndex;
-              return (
-                <div
-                  key={item.question}
-                  className="rounded-2xl border border-outline-variant/30 bg-white shadow-sm transition-shadow hover:shadow-md"
-                >
-                  <button
-                    type="button"
-                    onClick={() => setOpenIndex(open ? null : globalIndex)}
-                    aria-expanded={open}
-                    className="flex w-full items-center justify-between gap-4 p-6 text-left"
-                  >
-                    <span className="text-headline-md text-primary">{item.question}</span>
-                    <span className={`shrink-0 text-accent transition-transform duration-300 ${open ? "rotate-45" : ""}`}>
-                      <Icon name="arrow-up-right" className="h-6 w-6" strokeWidth={2.2} />
-                    </span>
-                  </button>
-                  <div
-                    className={`grid transition-[grid-template-rows] duration-300 ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="px-6 pb-6 text-body-md text-ink-muted">{item.answer}</p>
-                    </div>
+          <div>
+            {filtered
+              .filter((item) => item.category === category)
+              .map((item) => {
+                const globalIndex = items.indexOf(item);
+                const open = openIndex === globalIndex;
+                return (
+                  <div key={item.question} style={{ borderTop: "1px solid var(--border)" }}>
+                    <button
+                      type="button"
+                      onClick={() => setOpenIndex(open ? null : globalIndex)}
+                      aria-expanded={open}
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 20,
+                        textAlign: "left",
+                        background: "transparent",
+                        border: "none",
+                        cursor: "pointer",
+                        padding: "20px 4px",
+                        color: "var(--ink)",
+                        fontFamily: F,
+                        fontSize: 17,
+                        fontWeight: 600,
+                      }}
+                    >
+                      <span>{item.question}</span>
+                      <span style={{ flexShrink: 0, color: open ? "var(--accent)" : "var(--muted)", fontFamily: MONO, fontSize: 22, lineHeight: 1 }}>{open ? "−" : "+"}</span>
+                    </button>
+                    {open && <p style={{ margin: 0, padding: "0 4px 22px", maxWidth: 700, fontSize: 15, lineHeight: 1.65, color: "var(--ink-2)" }}>{item.answer}</p>}
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
       ))}

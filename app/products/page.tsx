@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/products" },
 };
 
-const F = "var(--font-fraunces),Fraunces,serif";
-const MONO = "var(--font-plex-mono),'IBM Plex Mono',monospace";
+const F = "var(--font-display),system-ui,sans-serif";
+const MONO = "var(--font-label),system-ui,sans-serif";
 
 function Ic({ d }: { d: string[] }) {
   return (
@@ -41,8 +41,8 @@ const PRODUCTS = [
   { name: "PayRoto", tags: ["Web App", "B2B"], desc: "Fast, simple payment workflows for growing businesses — reconciliation and reporting without the spreadsheet chaos.", previewBg: "radial-gradient(120% 120% at 0% 0%,#642400,#ff7c39)", glow: "radial-gradient(circle at 75% 25%,rgba(255,219,205,.45),transparent 60%)", d: ["M13 2 3 14h7l-1 8 10-12h-7z"], seed: 4, accent: "#ffd8c5" },
 ];
 
-const chip: CSSProperties = { display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: 4 };
-const btnMono: CSSProperties = { flex: 1, textAlign: "center", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 600, padding: "12px 0", borderRadius: 4 };
+const chip: CSSProperties = { display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: "var(--radius-md)" };
+const btnMono: CSSProperties = { flex: 1, textAlign: "center", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 600, padding: "12px 0", borderRadius: "var(--radius-md)" };
 
 export default function ProductsPage() {
   return (
@@ -61,25 +61,25 @@ export default function ProductsPage() {
       <section className="pr-hero" style={{ maxWidth: 1280, margin: "0 auto", padding: "80px 24px 60px", display: "grid", gridTemplateColumns: "1.15fr .85fr", gap: 56, alignItems: "center" }}>
         <div>
           <span style={chip}>Innovation Hub</span>
-          <h1 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(38px,5vw,66px)", lineHeight: 1.03, letterSpacing: "-.025em", margin: "24px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
-            Propelling <span style={{ fontStyle: "italic", color: "var(--accent)" }}>digital</span> futures.
+          <h1 style={{ fontFamily: F, fontWeight: 700, fontSize: "clamp(38px,5vw,66px)", lineHeight: 1.03, letterSpacing: "-.025em", margin: "24px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
+            Propelling <span style={{ color: "var(--accent)" }}>digital</span> futures.
           </h1>
           <p style={{ maxWidth: 520, margin: "22px 0 0", fontSize: 18, lineHeight: 1.6, color: "var(--ink-2)" }}>
             Explore our ecosystem of tools designed to simplify complex workflows, accelerate growth and put enterprise-grade software in reach of every business.
           </p>
           <div style={{ display: "flex", gap: 14, marginTop: 32, flexWrap: "wrap" }}>
-            <Link href="/contact" className="pr-btn-navy" style={{ background: "var(--navy)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: 4 }}>Talk to Us</Link>
-            <Link href="/ideas" className="pr-btn-ghost" style={{ border: "1px solid var(--border)", color: "var(--ink)", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: 4, background: "var(--surface)" }}>Join Academy</Link>
+            <Link href="/contact" className="pr-btn-navy" style={{ background: "var(--navy)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: "var(--radius-md)" }}>Talk to Us</Link>
+            <Link href="/ideas" className="pr-btn-ghost" style={{ border: "1px solid var(--border)", color: "var(--ink)", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: "var(--radius-md)", background: "var(--surface)" }}>Join Academy</Link>
           </div>
         </div>
         <div style={{ position: "relative" }} aria-hidden>
-          <div style={{ position: "relative", aspectRatio: "1", borderRadius: 4, overflow: "hidden", background: "radial-gradient(120% 120% at 30% 20%,#0b3b5c,#00253e 60%,#001322)", boxShadow: "var(--shadow-lg)", border: "1px solid rgba(255,255,255,.12)" }}>
+          <div style={{ position: "relative", aspectRatio: "1", borderRadius: "var(--radius-md)", overflow: "hidden", background: "radial-gradient(120% 120% at 30% 20%,#0b3b5c,#00253e 60%,#001322)", boxShadow: "var(--shadow-lg)", border: "1px solid rgba(255,255,255,.12)" }}>
             <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 30% 30%,rgba(57,184,253,.4),transparent 55%),radial-gradient(circle at 75% 70%,rgba(255,124,57,.32),transparent 50%)" }} />
-            <div className="animate-spin-slow" style={{ position: "absolute", left: "50%", top: "50%", width: 190, height: 190, transform: "translate(-50%,-50%) rotate(45deg)", border: "1.5px solid rgba(255,255,255,.22)", borderRadius: 4 }} />
-            <div style={{ position: "absolute", left: "50%", top: "50%", width: 96, height: 96, transform: "translate(-50%,-50%) rotate(45deg)", borderRadius: 4, background: "rgba(255,255,255,.1)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,255,255,.2)" }} />
+            <div className="animate-spin-slow" style={{ position: "absolute", left: "50%", top: "50%", width: 190, height: 190, transform: "translate(-50%,-50%) rotate(45deg)", border: "1.5px solid rgba(255,255,255,.22)", borderRadius: "var(--radius-md)" }} />
+            <div style={{ position: "absolute", left: "50%", top: "50%", width: 96, height: 96, transform: "translate(-50%,-50%) rotate(45deg)", borderRadius: "var(--radius-md)", background: "rgba(255,255,255,.1)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,255,255,.2)" }} />
           </div>
-          <div className="jx-float" style={{ position: "absolute", bottom: -22, left: -18, display: "flex", alignItems: "center", gap: 14, background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 5, padding: "16px 20px", boxShadow: "var(--shadow-lg)" }}>
-            <span style={{ width: 44, height: 44, display: "grid", placeItems: "center", borderRadius: 4, background: "var(--accent)", color: "#fff" }}>
+          <div className="jx-float" style={{ position: "absolute", bottom: -22, left: -18, display: "flex", alignItems: "center", gap: 14, background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "16px 20px", boxShadow: "var(--shadow-lg)" }}>
+            <span style={{ width: 44, height: 44, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "var(--accent)", color: "#fff" }}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z" /></svg>
             </span>
             <div>
@@ -99,13 +99,13 @@ export default function ProductsPage() {
           </div>
           <div className="pr-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 22 }}>
             {PRODUCTS.map((p) => (
-              <article key={p.name} className="jx-card" style={{ display: "flex", flexDirection: "column", border: "1px solid var(--border)", borderRadius: 4, background: "var(--surface)", boxShadow: "var(--shadow)", overflow: "hidden" }}>
+              <article key={p.name} className="jx-card" style={{ display: "flex", flexDirection: "column", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", boxShadow: "var(--shadow)", overflow: "hidden" }}>
                 <div style={{ position: "relative", height: 180, overflow: "hidden", background: p.previewBg }} aria-hidden>
                   <div style={{ position: "absolute", inset: 0, background: p.glow }} />
                   <div style={{ position: "absolute", left: 24, right: 24, bottom: 0, top: 30, borderRadius: "5px 5px 0 0", border: "1px solid rgba(255,255,255,.2)", background: "linear-gradient(160deg,rgba(255,255,255,.15),rgba(255,255,255,.03))", backdropFilter: "blur(4px)", padding: "15px 17px" }}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                       <span style={{ fontFamily: MONO, fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(255,255,255,.72)" }}>{p.name}</span>
-                      <span style={{ width: 28, height: 28, display: "grid", placeItems: "center", borderRadius: 4, background: "rgba(255,255,255,.16)", color: "#fff" }}>
+                      <span style={{ width: 28, height: 28, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "rgba(255,255,255,.16)", color: "#fff" }}>
                         <Ic d={p.d} />
                       </span>
                     </div>
@@ -115,7 +115,7 @@ export default function ProductsPage() {
                   </div>
                   <div style={{ position: "absolute", left: 18, top: 16, display: "flex", gap: 7 }}>
                     {p.tags.map((tag) => (
-                      <span key={tag} style={{ fontFamily: MONO, fontSize: 9.5, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 600, background: "rgba(255,255,255,.94)", color: "#00253e", padding: "4px 9px", borderRadius: 4 }}>{tag}</span>
+                      <span key={tag} style={{ fontFamily: MONO, fontSize: 9.5, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 600, background: "rgba(255,255,255,.94)", color: "#00253e", padding: "4px 9px", borderRadius: "var(--radius-md)" }}>{tag}</span>
                     ))}
                   </div>
                 </div>

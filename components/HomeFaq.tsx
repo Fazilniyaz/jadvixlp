@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const MONO = "var(--font-plex-mono),'IBM Plex Mono',monospace";
+const MONO = "var(--font-label),system-ui,sans-serif";
 
 const FAQS = [
   { q: "Where is Jadvix based?", a: "We operate from two offices — Ruislip in the United Kingdom and Chennai in India — serving local and international clients across both time zones." },

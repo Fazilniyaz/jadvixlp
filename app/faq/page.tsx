@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Icon from "@/components/Icon";
+import type { CSSProperties } from "react";
 import FaqAccordion, { type FaqItem } from "@/components/FaqAccordion";
 
 export const metadata: Metadata = {
@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     "Answers to frequently asked questions about Jadvix: where we're based, technologies we use, post-launch support, project timelines, digital marketing and the Jadvix Academy internship programme.",
   alternates: { canonical: "/faq" },
 };
+
+const F = "var(--font-display),system-ui,sans-serif";
+const MONO = "var(--font-label),system-ui,sans-serif";
 
 const FAQS: FaqItem[] = [
   {
@@ -71,64 +74,83 @@ const faqJsonLd = {
   })),
 };
 
+const chip: CSSProperties = { display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: "var(--radius-md)" };
+
+function SchoolIc() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 4L2 9l10 5 10-5-10-5z" />
+      <path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5M22 9v5" />
+    </svg>
+  );
+}
+function ArrowR() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+
 export default function FaqPage() {
   return (
-    <>
+    <div style={{ background: "var(--bg)" }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        .faq-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:start}
+        .faq-academy:hover{transform:translateY(-2px)}
+        @media(max-width:960px){.faq-grid{grid-template-columns:1fr}.faq-sidebar{position:static!important}}
+      `,
+        }}
+      />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-white pt-20 pb-16 md:pt-24">
-        <div className="container-jx relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="mb-6 text-display-md text-primary">How can we help?</h1>
-            <p className="text-body-lg text-ink-muted">
-              Answers to common questions about our services, projects, support and the Jadvix Academy.
-            </p>
-          </div>
-        </div>
-        <div className="absolute -right-20 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-primary-container/5 blur-3xl" aria-hidden="true" />
-        <div className="absolute bottom-0 left-1/4 h-96 w-96 rounded-full bg-accent/5 blur-[100px]" aria-hidden="true" />
+      {/* HERO */}
+      <section style={{ maxWidth: 820, margin: "0 auto", padding: "80px 24px 30px" }}>
+        <span style={chip}>Support &amp; Answers</span>
+        <h1 style={{ fontFamily: F, fontWeight: 700, fontSize: "clamp(36px,4.6vw,58px)", lineHeight: 1.05, letterSpacing: "-.025em", margin: "22px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
+          How can we <span style={{ color: "var(--accent)" }}>help?</span>
+        </h1>
+        <p style={{ maxWidth: 560, margin: "20px 0 0", fontSize: 18, lineHeight: 1.6, color: "var(--ink-2)" }}>
+          Answers to common questions about our services, projects, support and the Jadvix Academy.
+        </p>
       </section>
 
-      {/* Content */}
-      <section className="container-jx grid grid-cols-1 items-start gap-12 py-section-gap lg:grid-cols-12">
-        <div className="lg:col-span-7">
+      {/* CONTENT */}
+      <section className="faq-grid" style={{ maxWidth: 1280, margin: "0 auto", padding: "50px 24px 110px" }}>
+        <div>
           <FaqAccordion items={FAQS} />
         </div>
 
-        {/* Sidebar */}
-        <aside className="space-y-8 lg:sticky lg:top-28 lg:col-span-5">
-          <div className="relative overflow-hidden rounded-card-lg bg-primary p-8 text-white shadow-xl">
-            <div className="relative z-10">
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/20 text-accent">
-                <Icon name="school" className="h-6 w-6" />
+        <aside className="faq-sidebar" style={{ display: "flex", flexDirection: "column", gap: 20, position: "sticky", top: 100 }}>
+          <div style={{ position: "relative", overflow: "hidden", borderRadius: "var(--radius-lg)", background: "linear-gradient(155deg,#0b3b5c 0%,#00253e 70%,#001322 100%)", color: "#fff", padding: 32 }}>
+            <div aria-hidden style={{ position: "absolute", bottom: "-30%", right: "-15%", width: 260, height: 260, borderRadius: "50%", background: "radial-gradient(circle,rgba(57,184,253,.2),transparent 68%)" }} />
+            <div style={{ position: "relative" }}>
+              <div style={{ width: 48, height: 48, display: "grid", placeItems: "center", borderRadius: "var(--radius-sm)", background: "rgba(255,124,57,.18)", color: "var(--accent)", marginBottom: 20 }}>
+                <SchoolIc />
               </div>
-              <h2 className="mb-4 text-headline-md">Jadvix Academy</h2>
-              <p className="mb-6 text-body-md text-on-primary-container">
-                Want to learn, intern and join our team? The Academy takes you from practical training to
-                real-world projects.
+              <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: 22, margin: "0 0 10px" }}>Jadvix Academy</h2>
+              <p style={{ margin: "0 0 22px", fontSize: 14.5, lineHeight: 1.6, color: "rgba(206,229,255,.82)" }}>
+                Want to learn, intern and join our team? The Academy takes you from practical training to real-world projects.
               </p>
-              <Link href="/ideas" className="group inline-flex items-center gap-2 text-label-md font-semibold text-accent transition-all hover:gap-4">
-                Learn how it works <Icon name="arrow-right" className="h-4 w-4" />
+              <Link href="/ideas" className="faq-academy jx-lift" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontWeight: 600, fontSize: 14.5, color: "var(--accent)" }}>
+                Learn how it works <ArrowR />
               </Link>
             </div>
-            <Icon name="school" className="absolute -bottom-10 -right-10 h-48 w-48 text-white/5" />
           </div>
 
-          <div className="rounded-card-lg border border-outline-variant/30 bg-white p-8 shadow-card">
-            <h2 className="mb-4 text-headline-md text-primary">Still have questions?</h2>
-            <p className="mb-6 text-body-md text-ink-muted">
+          <div style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", background: "var(--surface)", boxShadow: "var(--shadow)", padding: 32 }}>
+            <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: 20, margin: "0 0 10px", color: "var(--ink)" }}>Still have questions?</h2>
+            <p style={{ margin: "0 0 22px", fontSize: 14.5, lineHeight: 1.6, color: "var(--ink-2)" }}>
               Our team replies within one business day — tell us what you&apos;re planning.
             </p>
-            <Link
-              href="/contact"
-              className="inline-block w-full rounded-xl bg-accent px-6 py-4 text-center text-label-md font-semibold text-white transition-transform hover:scale-[1.02]"
-            >
+            <Link href="/contact" className="jx-lift" style={{ display: "block", textAlign: "center", background: "var(--accent)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "14px 0", borderRadius: "var(--radius-sm)" }}>
               Contact Us
             </Link>
           </div>
         </aside>
       </section>
-    </>
+    </div>
   );
 }

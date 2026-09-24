@@ -1,7 +1,7 @@
 # Jadvix Website
 
 Production marketing site for **jadvix.uk** — Next.js 14 (App Router) + Tailwind CSS + TypeScript.
-Design system ported from the Google Stitch mockups (deep navy `#00253e`, teal `#006591`, coral `#ff7c39`, Plus Jakarta Sans).
+Design system: deep navy `#00253e`, teal `#006591`, coral `#ff7c39` on a Bricolage Grotesque / Hanken Grotesk / Space Grotesk type system.
 
 ## Run
 

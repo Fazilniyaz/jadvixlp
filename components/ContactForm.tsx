@@ -4,8 +4,8 @@ import { useState } from "react";
 import type { CSSProperties } from "react";
 import { SITE } from "@/lib/site";
 
-const MONO = "var(--font-plex-mono),'IBM Plex Mono',monospace";
-const F = "var(--font-fraunces),Fraunces,serif";
+const MONO = "var(--font-label),system-ui,sans-serif";
+const F = "var(--font-display),system-ui,sans-serif";
 
 const SERVICES = [
   "Website Design & Development",
@@ -16,7 +16,7 @@ const SERVICES = [
   "IT Consultancy",
 ];
 
-const label: CSSProperties = { display: "block", fontFamily: MONO, fontSize: 11, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--muted)", marginBottom: 7 };
+const label: CSSProperties = { display: "block", fontFamily: MONO, fontSize: 11, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--muted)", marginBottom: 7 };
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -36,13 +36,13 @@ export default function ContactForm() {
   }
 
   return (
-    <div style={{ border: "1px solid var(--border)", borderRadius: 4, background: "var(--surface)", boxShadow: "var(--shadow-lg)", padding: 40 }}>
+    <div style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", background: "var(--surface)", boxShadow: "var(--shadow-lg)", padding: 40 }}>
       <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: 26, letterSpacing: "-.01em", margin: "0 0 6px", color: "var(--ink)" }}>Send us a message</h2>
       <p style={{ margin: "0 0 28px", fontSize: 15, color: "var(--ink-2)" }}>Fill out the form and our team will reach out within one business day.</p>
 
       {sent ? (
-        <div style={{ display: "flex", gap: 14, alignItems: "flex-start", border: "1px solid color-mix(in srgb,var(--teal) 40%,transparent)", background: "color-mix(in srgb,var(--teal) 8%,var(--surface))", borderRadius: 5, padding: 22 }}>
-          <span style={{ flexShrink: 0, width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: 4, background: "var(--teal)", color: "#fff" }}>
+        <div style={{ display: "flex", gap: 14, alignItems: "flex-start", border: "1px solid color-mix(in srgb,var(--teal) 40%,transparent)", background: "color-mix(in srgb,var(--teal) 8%,var(--surface))", borderRadius: "var(--radius-md)", padding: 22 }}>
+          <span style={{ flexShrink: 0, width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: "var(--radius-sm)", background: "var(--teal)", color: "#fff" }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
           </span>
           <div>
@@ -80,7 +80,7 @@ export default function ContactForm() {
             <label style={label} htmlFor="cf-message">Message</label>
             <textarea id="cf-message" name="message" rows={5} required placeholder="Tell us about your project..." style={{ resize: "vertical" }} />
           </div>
-          <button type="submit" className="jx-lift" style={{ marginTop: 4, background: "var(--accent)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "15px 0", border: "none", borderRadius: 4, cursor: "pointer", width: "100%" }}>
+          <button type="submit" className="jx-lift" style={{ marginTop: 4, background: "var(--accent)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "15px 0", border: "none", borderRadius: "var(--radius-sm)", cursor: "pointer", width: "100%" }}>
             Send Message
           </button>
         </form>

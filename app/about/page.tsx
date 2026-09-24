@@ -1,17 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import type { CSSProperties } from "react";
-import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "900"],
-  style: ["normal", "italic"],
-  display: "swap",
-  variable: "--font-fraunces",
-});
-const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap", variable: "--font-inter" });
-const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500", "600"], display: "swap", variable: "--font-plex-mono" });
+import JxCta from "@/components/JxCta";
 
 export const metadata: Metadata = {
   title: "About Us — Full-Service IT Company in the UK & India",
@@ -20,25 +9,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
-/* Design-system tokens (light theme) ported from About.dc.html */
-const tokens = {
-  "--bg": "#f6f7fa",
-  "--surface": "#ffffff",
-  "--surface-2": "#f0f2f6",
-  "--border": "rgba(20,40,62,0.12)",
-  "--ink": "#141a22",
-  "--ink-2": "#44505e",
-  "--muted": "#7a8694",
-  "--navy": "#00253e",
-  "--teal": "#006591",
-  "--sky": "#39b8fd",
-  "--accent": "#ff7c39",
-  "--shadow": "0 1px 2px rgba(11,59,92,.06),0 10px 30px -12px rgba(11,59,92,.12)",
-  "--shadow-lg": "0 24px 60px -18px rgba(11,59,92,.22)",
-} as CSSProperties;
-
-const F = "var(--font-fraunces),Fraunces,serif";
-const MONO = "var(--font-plex-mono),'IBM Plex Mono',monospace";
+const F = "var(--font-display),system-ui,sans-serif";
+const MONO = "var(--font-label),system-ui,sans-serif";
 
 function Ic({ d, sw = 1.5 }: { d: string[]; sw?: number }) {
   return (
@@ -88,18 +60,10 @@ const h2Style: CSSProperties = { fontFamily: F, fontWeight: 600, fontSize: "clam
 
 export default function AboutPage() {
   return (
-    <div
-      className={`${fraunces.variable} ${inter.variable} ${plexMono.variable}`}
-      style={{ ...tokens, background: "var(--bg)", color: "var(--ink)", fontFamily: "var(--font-inter),system-ui,sans-serif" }}
-    >
+    <div style={{ background: "var(--bg)" }}>
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        .jx-card{transition:transform .3s,box-shadow .3s}
-        .jx-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
-        .jx-btn{transition:transform .2s,background .2s}
-        .jx-btn-primary:hover{transform:translateY(-2px)}
-        .jx-btn-ghost:hover{background:rgba(255,255,255,.15)}
         .jx-vision{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
         .jx-grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
         .jx-grid4.team{gap:22px}
@@ -111,11 +75,11 @@ export default function AboutPage() {
 
       {/* HERO */}
       <section style={{ maxWidth: 900, margin: "0 auto", padding: "90px 24px 70px", textAlign: "center" }}>
-        <span style={{ display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: 4 }}>
+        <span style={{ display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: "var(--radius-md)" }}>
           Pioneering Digital Evolution
         </span>
-        <h1 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(38px,5vw,64px)", lineHeight: 1.05, letterSpacing: "-.025em", margin: "24px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
-          Bridging stability and <span style={{ fontStyle: "italic", color: "var(--accent)" }}>innovation.</span>
+        <h1 style={{ fontFamily: F, fontWeight: 700, fontSize: "clamp(38px,5vw,64px)", lineHeight: 1.05, letterSpacing: "-.025em", margin: "24px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
+          Bridging stability and <span style={{ color: "var(--accent)" }}>innovation.</span>
         </h1>
         <p style={{ maxWidth: 640, margin: "22px auto 0", fontSize: 18, lineHeight: 1.6, color: "var(--ink-2)" }}>
           Jadvix is a full-service IT company guiding businesses through digital transformation with bespoke strategic craftsmanship — from our offices in the UK and India.
@@ -125,10 +89,10 @@ export default function AboutPage() {
       {/* VISION SPLIT */}
       <section style={{ background: "var(--surface-2)" }}>
         <div className="jx-vision" style={{ maxWidth: 1280, margin: "0 auto", padding: "90px 24px" }}>
-          <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", boxShadow: "var(--shadow-lg)", border: "1px solid var(--border)", borderRadius: 2, background: "radial-gradient(120% 120% at 30% 25%,#0b3b5c,#00253e)" }}>
+          <div style={{ position: "relative", aspectRatio: "4/3", overflow: "hidden", boxShadow: "var(--shadow-lg)", border: "1px solid var(--border)", borderRadius: "var(--radius-lg)", background: "radial-gradient(120% 120% at 30% 25%,#0b3b5c,#00253e)" }}>
             <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(150deg,rgba(0,37,62,.75),rgba(0,101,145,.2) 55%,transparent)", opacity: 0.4 }} />
             <div aria-hidden style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 82% 14%,rgba(57,184,253,.3),transparent 55%)", opacity: 0.4 }} />
-            <div style={{ position: "absolute", left: 18, bottom: 18, display: "flex", alignItems: "center", gap: 12, background: "rgba(255,255,255,.14)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,.3)", borderRadius: 6, padding: "12px 16px" }}>
+            <div style={{ position: "absolute", left: 18, bottom: 18, display: "flex", alignItems: "center", gap: 12, background: "rgba(255,255,255,.14)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,.3)", borderRadius: "var(--radius-md)", padding: "12px 16px" }}>
               <span style={{ fontFamily: F, fontWeight: 600, fontSize: 28, color: "#fff", lineHeight: 1 }}>2</span>
               <span style={{ fontFamily: MONO, fontSize: 9, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.92)", lineHeight: 1.35 }}>
                 Countries
@@ -166,8 +130,8 @@ export default function AboutPage() {
         </div>
         <div className="jx-grid4">
           {FOUNDATIONS.map((f) => (
-            <article key={f.title} className="jx-card" style={{ border: "1px solid var(--border)", borderRadius: 5, background: "var(--surface)", boxShadow: "var(--shadow)", padding: 28 }}>
-              <div style={{ width: 52, height: 52, display: "grid", placeItems: "center", borderRadius: 5, background: "color-mix(in srgb,var(--teal) 12%,transparent)", color: "var(--teal)", marginBottom: 18 }}>
+            <article key={f.title} className="jx-card" style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", boxShadow: "var(--shadow)", padding: 28 }}>
+              <div style={{ width: 52, height: 52, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "color-mix(in srgb,var(--teal) 12%,transparent)", color: "var(--teal)", marginBottom: 18 }}>
                 <Ic d={f.d} />
               </div>
               <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 19, margin: "0 0 8px", color: "var(--ink)" }}>{f.title}</h3>
@@ -187,8 +151,8 @@ export default function AboutPage() {
           <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
             {JOURNEY.map((j) => (
               <div key={j.label} style={{ display: "flex", gap: 22, alignItems: "flex-start" }}>
-                <span style={{ flexShrink: 0, width: 56, height: 56, display: "grid", placeItems: "center", borderRadius: 5, background: j.bg, color: "#fff", fontFamily: F, fontWeight: 700, fontSize: 20 }}>{j.label}</span>
-                <div style={{ border: "1px solid var(--border)", borderRadius: 5, background: "var(--surface)", boxShadow: "var(--shadow)", padding: "24px 26px", flex: 1 }}>
+                <span style={{ flexShrink: 0, width: 56, height: 56, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: j.bg, color: "#fff", fontFamily: F, fontWeight: 700, fontSize: 20 }}>{j.label}</span>
+                <div style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", boxShadow: "var(--shadow)", padding: "24px 26px", flex: 1 }}>
                   <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 20, margin: "0 0 8px", color: "var(--ink)" }}>{j.title}</h3>
                   <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: "var(--ink-2)" }}>{j.body}</p>
                 </div>
@@ -206,7 +170,7 @@ export default function AboutPage() {
         </div>
         <div className="jx-grid4 team">
           {TEAM.map((m) => (
-            <article key={m.name} className="jx-card" style={{ display: "flex", flexDirection: "column", border: "1px solid var(--border)", borderRadius: 6, background: "var(--surface)", boxShadow: "var(--shadow)", overflow: "hidden" }}>
+            <article key={m.name} className="jx-card" style={{ display: "flex", flexDirection: "column", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", boxShadow: "var(--shadow)", overflow: "hidden" }}>
               <div style={{ position: "relative", aspectRatio: "4/5", overflow: "hidden", background: "var(--surface-2)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={m.photo} alt={m.name} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} />
@@ -223,29 +187,14 @@ export default function AboutPage() {
 
       <div style={{ height: 60 }} />
 
-      {/* CTA */}
-      <section style={{ maxWidth: 1280, margin: "0 auto 90px", padding: "0 24px" }}>
-        <div style={{ position: "relative", overflow: "hidden", borderRadius: 4, background: "radial-gradient(120% 140% at 80% 0%,#0b3b5c,#00253e 60%,#001322)", color: "#fff", padding: "72px 56px", textAlign: "center" }}>
-          <div aria-hidden style={{ position: "absolute", top: "-30%", left: "50%", transform: "translateX(-50%)", width: 600, height: 400, background: "radial-gradient(circle,rgba(57,184,253,.28),transparent 62%)" }} />
-          <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px)", backgroundSize: "26px 26px", opacity: 0.5 }} />
-          <div style={{ position: "relative", zIndex: 2 }}>
-            <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(30px,4vw,50px)", lineHeight: 1.06, letterSpacing: "-.02em", margin: "0 auto 18px", maxWidth: 760, textWrap: "balance" } as CSSProperties}>
-              Ready to evolve?
-            </h2>
-            <p style={{ maxWidth: 560, margin: "0 auto 32px", fontSize: 17, lineHeight: 1.6, color: "rgba(206,229,255,.85)" }}>
-              Join the businesses across the UK and India that trust Jadvix with their digital growth.
-            </p>
-            <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-              <Link href="/contact" className="jx-btn jx-btn-primary" style={{ background: "var(--accent)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "15px 30px", borderRadius: 4, boxShadow: "0 14px 32px -8px rgba(255,124,57,.5)" }}>
-                Get a Free Project Quote
-              </Link>
-              <Link href="/ideas" className="jx-btn jx-btn-ghost" style={{ border: "1px solid rgba(255,255,255,.3)", background: "rgba(255,255,255,.07)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "15px 30px", borderRadius: 4 }}>
-                How Jadvix Works
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <JxCta
+        title="Ready to evolve?"
+        body="Join the businesses across the UK and India that trust Jadvix with their digital growth."
+        primaryLabel="Get a Free Project Quote"
+        primaryHref="/contact"
+        secondaryLabel="How Jadvix Works"
+        secondaryHref="/ideas"
+      />
     </div>
   );
 }

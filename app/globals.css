@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 /* ============================================================
-   JADVIX DESIGN SYSTEM (Claude Design — editorial)
-   Fraunces (display) · Inter (body) · IBM Plex Mono (labels)
+   JADVIX DESIGN SYSTEM
+   Bricolage Grotesque (display) · Hanken Grotesk (body) · Space Grotesk (labels)
    ============================================================ */
 :root {
   --bg: #f6f7fa;
@@ -20,8 +20,13 @@
   --sky: #39b8fd;
   --accent: #ff7c39;
   --link-ink: #006591;
-  --shadow: 0 1px 2px rgba(11, 59, 92, 0.06), 0 10px 30px -12px rgba(11, 59, 92, 0.12);
-  --shadow-lg: 0 24px 60px -18px rgba(11, 59, 92, 0.22);
+  --shadow-sm: 0 1px 2px rgba(11, 59, 92, 0.05);
+  --shadow: 0 1px 2px rgba(11, 59, 92, 0.05), 0 8px 24px -10px rgba(11, 59, 92, 0.14);
+  --shadow-lg: 0 20px 48px -16px rgba(11, 59, 92, 0.24);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
   color-scheme: light;
 }
 html[data-theme="dark"] {
@@ -38,8 +43,9 @@ html[data-theme="dark"] {
   --sky: #5cc2fd;
   --accent: #ff8a4f;
   --link-ink: #5cc2fd;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 34px -14px rgba(0, 0, 0, 0.6);
-  --shadow-lg: 0 30px 70px -20px rgba(0, 0, 0, 0.7);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 28px -12px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 26px 60px -18px rgba(0, 0, 0, 0.65);
   color-scheme: dark;
 }
 
@@ -52,7 +58,7 @@ html[data-theme="dark"] {
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font-family: var(--font-inter), "Inter", system-ui, sans-serif;
+    font-family: var(--font-body), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     transition: background 0.4s ease, color 0.4s ease;
   }
@@ -89,17 +95,17 @@ html[data-theme="dark"] {
   padding-left: 24px;
   padding-right: 24px;
 }
-.font-fraunces {
-  font-family: var(--font-fraunces), Fraunces, serif;
+.font-display {
+  font-family: var(--font-display), system-ui, sans-serif;
 }
-.font-mono-jx {
-  font-family: var(--font-plex-mono), "IBM Plex Mono", monospace;
+.font-label {
+  font-family: var(--font-label), system-ui, sans-serif;
 }
 .jx-card {
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .jx-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
 .jx-lift {
@@ -111,12 +117,12 @@ html[data-theme="dark"] {
 input,
 textarea,
 select {
-  font-family: var(--font-inter), "Inter", sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-size: 15px;
   color: var(--ink);
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   padding: 13px 15px;
   width: 100%;
   outline: none;

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SITE } from "@/lib/site";
 
-const MONO = "var(--font-plex-mono),'IBM Plex Mono',monospace";
+const MONO = "var(--font-label),system-ui,sans-serif";
 
 const COLS = [
   {

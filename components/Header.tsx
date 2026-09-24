@@ -20,10 +20,9 @@ export default function Header() {
   useEffect(() => setOpen(false), [pathname]);
 
   const linkBase: React.CSSProperties = {
-    fontFamily: "var(--font-plex-mono),'IBM Plex Mono',monospace",
-    fontSize: 12.5,
-    letterSpacing: ".06em",
-    textTransform: "uppercase",
+    fontFamily: "var(--font-label),system-ui,sans-serif",
+    fontSize: 13,
+    letterSpacing: ".03em",
   };
 
   return (
@@ -40,8 +39,8 @@ export default function Header() {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        html[data-theme="dark"] .jx-logo-on-light{display:none}
-        html:not([data-theme="dark"]) .jx-logo-on-dark{display:none}
+        html[data-theme="dark"] .jx-logo-on-light{display:none!important}
+        html:not([data-theme="dark"]) .jx-logo-on-dark{display:none!important}
         .jx-navlink:hover{color:var(--ink)!important}
         @media(max-width:860px){.jx-desktop-nav{display:none!important}.jx-burger{display:grid!important}}
       `,
@@ -86,7 +85,7 @@ export default function Header() {
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            style={{ display: "none", placeItems: "center", width: 38, height: 38, border: "1px solid var(--border)", borderRadius: 4, background: "var(--surface)", color: "var(--ink)", cursor: "pointer" }}
+            style={{ display: "none", placeItems: "center", width: 38, height: 38, border: "1px solid var(--border)", borderRadius: "var(--radius-sm)", background: "var(--surface)", color: "var(--ink)", cursor: "pointer" }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
               {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M3 6h18M3 12h18M3 18h18" />}

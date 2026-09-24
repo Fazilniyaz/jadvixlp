@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" },
 };
 
-const F = "var(--font-fraunces),Fraunces,serif";
-const MONO = "var(--font-plex-mono),'IBM Plex Mono',monospace";
+const F = "var(--font-display),system-ui,sans-serif";
+const MONO = "var(--font-label),system-ui,sans-serif";
 
 function Ic({ d, sw = 1.5, size = 22 }: { d: string[]; sw?: number; size?: number }) {
   return (
@@ -40,9 +40,9 @@ const WHY = [
   { title: "Data-Driven Insights", body: "Strategy backed by hard numbers — we measure and optimise every touchpoint." },
 ];
 
-const chip: CSSProperties = { display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: 4 };
-const btnNavy: CSSProperties = { background: "var(--navy)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: 4 };
-const btnGhost: CSSProperties = { border: "1px solid var(--border)", color: "var(--ink)", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: 4, background: "var(--surface)" };
+const chip: CSSProperties = { display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: "var(--radius-md)" };
+const btnNavy: CSSProperties = { background: "var(--navy)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: "var(--radius-md)" };
+const btnGhost: CSSProperties = { border: "1px solid var(--border)", color: "var(--ink)", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: "var(--radius-md)", background: "var(--surface)" };
 
 export default function ServicesPage() {
   return (
@@ -62,10 +62,10 @@ export default function ServicesPage() {
       <section className="svc-hero" style={{ maxWidth: 1280, margin: "0 auto", padding: "80px 24px 40px", display: "grid", gridTemplateColumns: "1.1fr .9fr", gap: 56, alignItems: "center" }}>
         <div>
           <span style={chip}>Innovation Redefined</span>
-          <h1 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(38px,5vw,66px)", lineHeight: 1.03, letterSpacing: "-.025em", margin: "24px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
+          <h1 style={{ fontFamily: F, fontWeight: 700, fontSize: "clamp(38px,5vw,66px)", lineHeight: 1.03, letterSpacing: "-.025em", margin: "24px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
             Our expertise,
             <br />
-            your <span style={{ fontStyle: "italic", color: "var(--accent)" }}>advantage.</span>
+            your <span style={{ color: "var(--accent)" }}>advantage.</span>
           </h1>
           <p style={{ maxWidth: 500, margin: "22px 0 0", fontSize: 18, lineHeight: 1.6, color: "var(--ink-2)" }}>
             End-to-end IT solutions — from your first website to enterprise software, and from launch-day marketing to long-term security. One accountable team across the UK and India.
@@ -76,7 +76,7 @@ export default function ServicesPage() {
           </div>
         </div>
         <div style={{ position: "relative", perspective: 1400 }} aria-hidden>
-          <div style={{ position: "relative", transform: "rotateY(-12deg) rotateX(6deg)", transformStyle: "preserve-3d", borderRadius: 4, overflow: "hidden", background: "radial-gradient(120% 120% at 100% 0%,#0b3b5c,#00253e)", boxShadow: "var(--shadow-lg)", border: "1px solid rgba(255,255,255,.14)" }}>
+          <div style={{ position: "relative", transform: "rotateY(-12deg) rotateX(6deg)", transformStyle: "preserve-3d", borderRadius: "var(--radius-md)", overflow: "hidden", background: "radial-gradient(120% 120% at 100% 0%,#0b3b5c,#00253e)", boxShadow: "var(--shadow-lg)", border: "1px solid rgba(255,255,255,.14)" }}>
             <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 25% 20%,rgba(57,184,253,.35),transparent 55%),radial-gradient(circle at 85% 85%,rgba(255,124,57,.25),transparent 50%)" }} />
             <div style={{ position: "relative", padding: 28 }}>
               <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(206,229,255,.6)" }}>Service Stack</div>
@@ -87,7 +87,7 @@ export default function ServicesPage() {
                   ["Digital Marketing & SEO", "var(--sky)"],
                   ["Cybersecurity & Cloud", "var(--accent)"],
                 ].map(([label, dot]) => (
-                  <div key={label} style={{ display: "flex", alignItems: "center", gap: 12, background: "rgba(255,255,255,.09)", border: "1px solid rgba(255,255,255,.14)", borderRadius: 4, padding: "13px 15px" }}>
+                  <div key={label} style={{ display: "flex", alignItems: "center", gap: 12, background: "rgba(255,255,255,.09)", border: "1px solid rgba(255,255,255,.14)", borderRadius: "var(--radius-md)", padding: "13px 15px" }}>
                     <span style={{ width: 9, height: 9, borderRadius: 2, background: dot }} />
                     <span style={{ color: "#fff", fontSize: 14, fontWeight: 500 }}>{label}</span>
                   </div>
@@ -95,7 +95,7 @@ export default function ServicesPage() {
               </div>
             </div>
           </div>
-          <div className="jx-float" style={{ position: "absolute", bottom: -24, left: -18, background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 5, padding: "18px 22px", boxShadow: "var(--shadow-lg)" }}>
+          <div className="jx-float" style={{ position: "absolute", bottom: -24, left: -18, background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "18px 22px", boxShadow: "var(--shadow-lg)" }}>
             <div style={{ fontFamily: F, fontWeight: 600, fontSize: 24, color: "var(--ink)" }}>UK + India</div>
             <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--muted)", marginTop: 4 }}>One Delivery Team</div>
           </div>
@@ -112,8 +112,8 @@ export default function ServicesPage() {
           </div>
           <div className="svc-pillars" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 18 }}>
             {SERVICES.map((s) => (
-              <article key={s.title} className="jx-card" style={{ border: "1px solid var(--border)", borderRadius: 5, background: "var(--surface)", boxShadow: "var(--shadow)", padding: 26 }}>
-                <div style={{ width: 48, height: 48, display: "grid", placeItems: "center", borderRadius: 4, background: "color-mix(in srgb,var(--teal) 12%,transparent)", color: "var(--teal)", marginBottom: 16 }}>
+              <article key={s.title} className="jx-card" style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", boxShadow: "var(--shadow)", padding: 26 }}>
+                <div style={{ width: 48, height: 48, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "color-mix(in srgb,var(--teal) 12%,transparent)", color: "var(--teal)", marginBottom: 16 }}>
                   <Ic d={s.d} />
                 </div>
                 <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 18, margin: "0 0 7px", color: "var(--ink)" }}>{s.title}</h3>
@@ -133,7 +133,7 @@ export default function ServicesPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
               {WHY.map((w) => (
                 <div key={w.title} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
-                  <span style={{ flexShrink: 0, width: 26, height: 26, display: "grid", placeItems: "center", borderRadius: 4, background: "color-mix(in srgb,var(--teal) 16%,transparent)", color: "var(--teal)", marginTop: 2 }}>
+                  <span style={{ flexShrink: 0, width: 26, height: 26, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "color-mix(in srgb,var(--teal) 16%,transparent)", color: "var(--teal)", marginTop: 2 }}>
                     <Ic d={["M20 6 9 17l-5-5"]} sw={2.4} size={15} />
                   </span>
                   <div>
@@ -147,24 +147,24 @@ export default function ServicesPage() {
           </div>
           <div className="svc-why-imgs" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} aria-hidden>
             <div style={{ display: "flex", flexDirection: "column", gap: 16, marginTop: 40 }}>
-              <div style={{ position: "relative", overflow: "hidden", height: 200, borderRadius: 5, background: "radial-gradient(120% 120% at 60% 40%,#0b3b5c,#00253e)", border: "1px solid var(--border)" }}>
+              <div style={{ position: "relative", overflow: "hidden", height: 200, borderRadius: "var(--radius-md)", background: "radial-gradient(120% 120% at 60% 40%,#0b3b5c,#00253e)", border: "1px solid var(--border)" }}>
                 <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 60% 40%,rgba(57,184,253,.35),transparent 60%)" }} />
                 <svg style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)" }} width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M3 3v18h18" />
                   <path d="M7 15l3-4 3 2 4-6" />
                 </svg>
               </div>
-              <div style={{ borderRadius: 5, background: "var(--accent)", color: "#fff", padding: 26 }}>
+              <div style={{ borderRadius: "var(--radius-md)", background: "var(--accent)", color: "#fff", padding: 26 }}>
                 <div style={{ fontFamily: F, fontWeight: 600, fontSize: 26 }}>2 Offices</div>
                 <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", opacity: 0.85, marginTop: 6 }}>UK & India</div>
               </div>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <div style={{ borderRadius: 5, background: "var(--navy-2)", color: "#fff", padding: 26 }}>
+              <div style={{ borderRadius: "var(--radius-md)", background: "var(--navy-2)", color: "#fff", padding: 26 }}>
                 <div style={{ fontFamily: F, fontWeight: 600, fontSize: 26 }}>8+</div>
                 <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", opacity: 0.85, marginTop: 6 }}>Disciplines</div>
               </div>
-              <div style={{ position: "relative", overflow: "hidden", height: 250, borderRadius: 5, background: "radial-gradient(120% 120% at 40% 70%,#0b3b5c,#00253e)", border: "1px solid var(--border)" }}>
+              <div style={{ position: "relative", overflow: "hidden", height: 250, borderRadius: "var(--radius-md)", background: "radial-gradient(120% 120% at 40% 70%,#0b3b5c,#00253e)", border: "1px solid var(--border)" }}>
                 <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 40% 70%,rgba(255,124,57,.28),transparent 55%)" }} />
                 <svg style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)" }} width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="9" cy="7" r="3" />

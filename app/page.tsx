@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-const F = "var(--font-fraunces),Fraunces,serif";
-const MONO = "var(--font-plex-mono),'IBM Plex Mono',monospace";
+const F = "var(--font-display),system-ui,sans-serif";
+const MONO = "var(--font-label),system-ui,sans-serif";
 
 function ArrowR({ s = 15 }: { s?: number }) {
   return (
@@ -96,26 +96,25 @@ export default function HomePage() {
       />
 
       {/* ============ HERO ============ */}
-      <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(120% 120% at 80% 0%,#0b3b5c 0%,#00253e 55%,#001526 100%)", color: "#fff" }}>
-        <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,.10) 1px,transparent 1px)", backgroundSize: "26px 26px", WebkitMaskImage: "radial-gradient(120% 90% at 50% 30%,#000 40%,transparent 85%)", maskImage: "radial-gradient(120% 90% at 50% 30%,#000 40%,transparent 85%)", opacity: 0.5 } as CSSProperties} />
-        <div aria-hidden style={{ position: "absolute", top: "-10%", right: "-5%", width: 620, height: 620, borderRadius: "50%", background: "radial-gradient(circle,rgba(57,184,253,.35),transparent 62%)", filter: "blur(20px)" }} />
-        <div aria-hidden style={{ position: "absolute", bottom: "-20%", left: "-8%", width: 520, height: 520, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,124,57,.22),transparent 60%)", filter: "blur(20px)" }} />
+      <section style={{ position: "relative", overflow: "hidden", background: "linear-gradient(150deg,#0b3b5c 0%,#00253e 55%,#001526 100%)", color: "#fff" }}>
+        <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px)", backgroundSize: "28px 28px", WebkitMaskImage: "radial-gradient(120% 90% at 50% 30%,#000 30%,transparent 78%)", maskImage: "radial-gradient(120% 90% at 50% 30%,#000 30%,transparent 78%)", opacity: 0.4 } as CSSProperties} />
+        <div aria-hidden style={{ position: "absolute", top: "-14%", right: "-8%", width: 620, height: 620, borderRadius: "50%", background: "radial-gradient(circle,rgba(57,184,253,.28),transparent 62%)", filter: "blur(24px)" }} />
 
         <div className="hz-hero-grid" style={{ position: "relative", zIndex: 2, maxWidth: 1280, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "1.05fr .95fr", gap: 48, alignItems: "center", minHeight: "88vh" }}>
           <div style={{ padding: "64px 0" }}>
-            <h1 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(44px,5.4vw,74px)", lineHeight: 1.02, letterSpacing: "-.025em", margin: 0, textWrap: "balance" } as CSSProperties}>
+            <h1 style={{ fontFamily: F, fontWeight: 700, fontSize: "clamp(44px,5.4vw,74px)", lineHeight: 1.02, letterSpacing: "-.025em", margin: 0, textWrap: "balance" } as CSSProperties}>
               Design. Develop.
               <br />
-              Promote. <span style={{ fontStyle: "italic", color: "var(--sky)" }}>Secure.</span>
+              Promote. <span style={{ color: "var(--sky)" }}>Secure.</span>
             </h1>
             <p style={{ maxWidth: 520, margin: "24px 0 0", fontSize: 18, lineHeight: 1.6, color: "rgba(206,229,255,.86)" }}>
               Jadvix builds scalable websites, apps and digital experiences from the UK and India — reliable engineering fused with creative, conversion-focused design.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginTop: 34 }}>
-              <Link href="/contact" className="jx-lift" style={{ display: "inline-flex", alignItems: "center", gap: 9, background: "var(--accent)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: 4, boxShadow: "0 12px 30px -8px rgba(255,124,57,.5)" }}>
+              <Link href="/contact" className="jx-lift" style={{ display: "inline-flex", alignItems: "center", gap: 9, background: "var(--accent)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: "var(--radius-sm)", boxShadow: "0 12px 30px -8px rgba(255,124,57,.5)" }}>
                 Get a Free Project Quote <ArrowR s={17} />
               </Link>
-              <Link href="/services" className="hz-ghost" style={{ display: "inline-flex", alignItems: "center", gap: 9, border: "1px solid rgba(255,255,255,.28)", background: "rgba(255,255,255,.06)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: 4, backdropFilter: "blur(6px)" }}>
+              <Link href="/services" className="hz-ghost" style={{ display: "inline-flex", alignItems: "center", gap: 9, border: "1px solid rgba(255,255,255,.28)", background: "rgba(255,255,255,.06)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: "var(--radius-sm)", backdropFilter: "blur(6px)" }}>
                 Explore Our Work
               </Link>
             </div>
@@ -144,7 +143,7 @@ export default function HomePage() {
               <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%) translateZ(46px)" }}>
                 <div style={{ position: "relative", animation: "jxfloatH 6.5s ease-in-out infinite" }}>
                   <div aria-hidden style={{ position: "absolute", left: "50%", bottom: -30, transform: "translateX(-50%)", width: 180, height: 32, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,0,0,.55),transparent 70%)", filter: "blur(8px)" }} />
-                  <div style={{ position: "relative", width: 228, padding: "28px 24px 24px", borderRadius: 4, background: "linear-gradient(150deg,rgba(255,255,255,.24),rgba(57,184,253,.10) 55%,rgba(255,255,255,.04))", border: "1px solid rgba(255,255,255,.34)", backdropFilter: "blur(16px)", boxShadow: "0 46px 90px -26px rgba(0,0,0,.78),inset 0 1px 0 rgba(255,255,255,.5)", transform: "rotateY(-12deg) rotateX(7deg)", textAlign: "center" }}>
+                  <div style={{ position: "relative", width: 228, padding: "28px 24px 24px", borderRadius: "var(--radius-md)", background: "linear-gradient(150deg,rgba(255,255,255,.24),rgba(57,184,253,.10) 55%,rgba(255,255,255,.04))", border: "1px solid rgba(255,255,255,.34)", backdropFilter: "blur(16px)", boxShadow: "0 46px 90px -26px rgba(0,0,0,.78),inset 0 1px 0 rgba(255,255,255,.5)", transform: "rotateY(-12deg) rotateX(7deg)", textAlign: "center" }}>
                     <div aria-hidden style={{ position: "absolute", top: -1, left: 22, right: 22, height: 2, borderRadius: 2, background: "linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent)" }} />
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src="/jadvix-logo-light.svg" alt="Jadvix" style={{ position: "relative", width: 156, display: "block", margin: "2px auto 0", filter: "drop-shadow(0 8px 18px rgba(0,0,0,.5))" }} />
@@ -176,8 +175,8 @@ export default function HomePage() {
             <div style={{ display: "flex", alignItems: "center", gap: 9, fontFamily: MONO, fontSize: 12, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 600 }}>
               <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--accent)" }} />Our Services
             </div>
-            <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(30px,3.6vw,46px)", lineHeight: 1.08, letterSpacing: "-.02em", margin: "14px 0 0", color: "var(--ink)" }}>
-              Strategic Digital <span style={{ fontStyle: "italic", color: "var(--teal)" }}>Capabilities.</span>
+            <h2 style={{ fontFamily: F, fontWeight: 700, fontSize: "clamp(30px,3.6vw,46px)", lineHeight: 1.08, letterSpacing: "-.02em", margin: "14px 0 0", color: "var(--ink)" }}>
+              Strategic digital <span style={{ color: "var(--teal)" }}>capabilities.</span>
             </h2>
           </div>
           <Link href="/services" className="hz-explore" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: MONO, fontSize: 12.5, letterSpacing: ".05em", textTransform: "uppercase", fontWeight: 600, color: "var(--ink)", borderBottom: "2px solid var(--accent)", paddingBottom: 4 }}>
@@ -187,9 +186,9 @@ export default function HomePage() {
 
         <div className="hz-svc-feature" style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr", gap: 20 }}>
           {/* feature card */}
-          <article className="jx-card hz-card" style={{ position: "relative", overflow: "hidden", border: "1px solid var(--border)", borderRadius: 5, background: "var(--surface)", boxShadow: "var(--shadow)", display: "flex" }}>
+          <article className="jx-card hz-card" style={{ position: "relative", overflow: "hidden", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", boxShadow: "var(--shadow)", display: "flex" }}>
             <div className="hz-feature-copy hz-feature-split-child" style={{ padding: 34, display: "flex", flexDirection: "column", justifyContent: "center", maxWidth: "56%" }}>
-              <div style={{ width: 52, height: 52, display: "grid", placeItems: "center", borderRadius: 4, background: "color-mix(in srgb,var(--teal) 12%,transparent)", color: "var(--teal)", marginBottom: 20 }}>
+              <div style={{ width: 52, height: 52, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "color-mix(in srgb,var(--teal) 12%,transparent)", color: "var(--teal)", marginBottom: 20 }}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" /></svg>
               </div>
               <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 24, letterSpacing: "-.01em", margin: "0 0 8px", color: "var(--ink)" }}>Website Design &amp; Development</h3>
@@ -215,11 +214,11 @@ export default function HomePage() {
                       <div style={{ height: 7, width: "80%", borderRadius: 2, background: "rgba(255,255,255,.14)", marginTop: 7 }} />
                       <div style={{ height: 22, width: 76, borderRadius: 3, background: "var(--accent)", marginTop: 14 }} />
                     </div>
-                    <div style={{ borderRadius: 5, background: "linear-gradient(150deg,rgba(57,184,253,.5),rgba(255,124,57,.35))", minHeight: 78 }} />
+                    <div style={{ borderRadius: "var(--radius-md)", background: "linear-gradient(150deg,rgba(57,184,253,.5),rgba(255,124,57,.35))", minHeight: 78 }} />
                   </div>
                 </div>
                 <div style={{ position: "absolute", left: 12, bottom: 24, transform: "translateZ(70px)" }}>
-                  <div style={{ animation: "jxfloatH 6s ease-in-out infinite", borderRadius: 6, border: "1px solid rgba(255,255,255,.24)", background: "linear-gradient(160deg,rgba(255,255,255,.2),rgba(255,255,255,.05))", backdropFilter: "blur(8px)", boxShadow: "0 24px 46px -20px rgba(0,0,0,.65)", padding: "12px 14px", width: 150 }}>
+                  <div style={{ animation: "jxfloatH 6s ease-in-out infinite", borderRadius: "var(--radius-md)", border: "1px solid rgba(255,255,255,.24)", background: "linear-gradient(160deg,rgba(255,255,255,.2),rgba(255,255,255,.05))", backdropFilter: "blur(8px)", boxShadow: "0 24px 46px -20px rgba(0,0,0,.65)", padding: "12px 14px", width: 150 }}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                       <span style={{ fontFamily: MONO, fontSize: 8.5, letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.65)" }}>Responsive</span>
                       <span style={{ width: 26, height: 14, borderRadius: 100, background: "var(--sky)", position: "relative" }}>
@@ -231,7 +230,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div style={{ position: "absolute", right: 14, bottom: 22, transform: "translateZ(95px)" }}>
-                  <div style={{ animation: "jxfloat2 7s ease-in-out infinite", display: "flex", alignItems: "center", gap: 10, borderRadius: 6, background: "linear-gradient(160deg,rgba(255,124,57,.94),rgba(255,124,57,.75))", border: "1px solid rgba(255,255,255,.24)", boxShadow: "0 24px 46px -18px rgba(255,124,57,.55)", padding: "11px 14px" }}>
+                  <div style={{ animation: "jxfloat2 7s ease-in-out infinite", display: "flex", alignItems: "center", gap: 10, borderRadius: "var(--radius-md)", background: "linear-gradient(160deg,rgba(255,124,57,.94),rgba(255,124,57,.75))", border: "1px solid rgba(255,255,255,.24)", boxShadow: "0 24px 46px -18px rgba(255,124,57,.55)", padding: "11px 14px" }}>
                     <span style={{ fontFamily: F, fontWeight: 600, fontSize: 24, color: "#fff", lineHeight: 1 }}>98</span>
                     <span style={{ fontFamily: MONO, fontSize: 8.5, letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.92)", lineHeight: 1.3 }}>Lighthouse<br />Score</span>
                   </div>
@@ -241,7 +240,7 @@ export default function HomePage() {
           </article>
 
           {/* dark app card */}
-          <article className="jx-card hz-card" style={{ position: "relative", overflow: "hidden", borderRadius: 5, background: "radial-gradient(120% 120% at 0% 0%,#0b3b5c,#050c18)", color: "#fff", boxShadow: "var(--shadow)", padding: 34, minHeight: 360, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+          <article className="jx-card hz-card" style={{ position: "relative", overflow: "hidden", borderRadius: "var(--radius-md)", background: "radial-gradient(120% 120% at 0% 0%,#0b3b5c,#050c18)", color: "#fff", boxShadow: "var(--shadow)", padding: 34, minHeight: 360, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
             <div aria-hidden style={{ position: "absolute", top: -40, right: -40, width: 220, height: 220, borderRadius: "50%", background: "radial-gradient(circle,rgba(57,184,253,.3),transparent 65%)" }} />
             <div aria-hidden style={{ position: "absolute", top: 22, right: 18, perspective: 900 }}>
               <div style={{ transform: "rotate(6deg)", animation: "jxfloatH 7s ease-in-out infinite" }}>
@@ -276,7 +275,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div style={{ position: "relative", width: 52, height: 52, display: "grid", placeItems: "center", borderRadius: 4, background: "rgba(255,255,255,.1)", color: "#fff", marginBottom: "auto" }}>
+            <div style={{ position: "relative", width: 52, height: 52, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "rgba(255,255,255,.1)", color: "#fff", marginBottom: "auto" }}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5" /><path d="M11 18h2" /></svg>
             </div>
             <h3 style={{ position: "relative", fontFamily: F, fontWeight: 600, fontSize: 24, margin: "22px 0 8px", maxWidth: "60%" }}>Mobile &amp; Web Apps</h3>
@@ -289,7 +288,7 @@ export default function HomePage() {
         {/* three capability cards */}
         <div className="hz-svc3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20, marginTop: 20 }}>
           {/* Digital Marketing */}
-          <article className="jx-card hz-card" style={{ display: "flex", flexDirection: "column", overflow: "hidden", border: "1px solid var(--border)", borderRadius: 4, background: "var(--surface)", boxShadow: "var(--shadow)" }}>
+          <article className="jx-card hz-card" style={{ display: "flex", flexDirection: "column", overflow: "hidden", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", boxShadow: "var(--shadow)" }}>
             <div style={{ position: "relative", height: 152, overflow: "hidden", background: "radial-gradient(130% 130% at 15% 0%,#0b3b5c,#00253e)" }} aria-hidden>
               <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 85% 15%,rgba(57,184,253,.32),transparent 55%)" }} />
               <span style={{ ...featureBadge, top: 16, right: 16, fontSize: 10, letterSpacing: ".06em", color: "#fff", background: "rgba(255,124,57,.92)" }}>+142% leads</span>
@@ -307,7 +306,7 @@ export default function HomePage() {
             </div>
           </article>
           {/* Cybersecurity */}
-          <article className="jx-card hz-card" style={{ display: "flex", flexDirection: "column", overflow: "hidden", border: "1px solid var(--border)", borderRadius: 4, background: "var(--surface)", boxShadow: "var(--shadow)" }}>
+          <article className="jx-card hz-card" style={{ display: "flex", flexDirection: "column", overflow: "hidden", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", boxShadow: "var(--shadow)" }}>
             <div style={{ position: "relative", height: 152, overflow: "hidden", background: "radial-gradient(130% 130% at 15% 0%,#0b3b5c,#00253e)" }} aria-hidden>
               <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 80% 80%,rgba(255,124,57,.2),transparent 55%)" }} />
               <svg style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)" }} width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.88)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2 4 5v7c0 5 8 10 8 10s8-5 8-10V5z" /><path d="m9 12 2 2 4-4" /></svg>
@@ -322,7 +321,7 @@ export default function HomePage() {
             </div>
           </article>
           {/* Cloud */}
-          <article className="jx-card hz-card" style={{ display: "flex", flexDirection: "column", overflow: "hidden", border: "1px solid var(--border)", borderRadius: 4, background: "var(--surface)", boxShadow: "var(--shadow)" }}>
+          <article className="jx-card hz-card" style={{ display: "flex", flexDirection: "column", overflow: "hidden", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", boxShadow: "var(--shadow)" }}>
             <div style={{ position: "relative", height: 152, overflow: "hidden", background: "radial-gradient(130% 130% at 15% 0%,#0b3b5c,#00253e)" }} aria-hidden>
               <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 75% 20%,rgba(57,184,253,.3),transparent 55%)" }} />
               <svg style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)" }} width="200" height="110" viewBox="0 0 200 110" fill="none">
@@ -341,8 +340,8 @@ export default function HomePage() {
       </section>
 
       {/* ============ PRODUCTS ============ */}
-      <section style={{ position: "relative", overflow: "hidden", marginTop: 80, background: "radial-gradient(120% 100% at 50% 0%,#0b3b5c,#00253e 60%,#001322)", color: "#fff" }}>
-        <div aria-hidden style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px)", backgroundSize: "28px 28px", opacity: 0.5 }} />
+      <section style={{ position: "relative", overflow: "hidden", marginTop: 80, background: "linear-gradient(175deg,#0b3b5c 0%,#00253e 58%,#001322 100%)", color: "#fff" }}>
+        <div aria-hidden style={{ position: "absolute", top: "20%", left: "-6%", width: 480, height: 480, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,124,57,.14),transparent 68%)", filter: "blur(20px)" }} />
         <div style={{ position: "relative", zIndex: 2, maxWidth: 1280, margin: "0 auto", padding: "90px 24px 100px" }}>
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 20, marginBottom: 52 }}>
             <div>
@@ -350,7 +349,7 @@ export default function HomePage() {
                 <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--accent)" }} />The Ecosystem
               </div>
               <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(30px,3.6vw,46px)", lineHeight: 1.08, letterSpacing: "-.02em", margin: "14px 0 12px" }}>
-                Four products, <span style={{ fontStyle: "italic", color: "var(--sky)" }}>one platform.</span>
+                Four products, <span style={{ color: "var(--sky)" }}>one platform.</span>
               </h2>
               <p style={{ maxWidth: 520, margin: 0, fontSize: 16, lineHeight: 1.6, color: "rgba(206,229,255,.8)" }}>Enterprise-grade tools built in-house — sharing one design language, one login experience and one standard of craft.</p>
             </div>
@@ -361,19 +360,19 @@ export default function HomePage() {
 
           <div className="hz-prodgrid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 22 }}>
             {PRODUCTS.map((p) => (
-              <article key={p.name} className="hz-prod" style={{ position: "relative", overflow: "hidden", border: "1px solid rgba(255,255,255,.14)", borderRadius: 4, background: "linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02))", backdropFilter: "blur(8px)", transition: "transform .35s,border-color .35s", boxShadow: "0 30px 60px -34px rgba(0,0,0,.7)" }}>
+              <article key={p.name} className="hz-prod" style={{ position: "relative", overflow: "hidden", border: "1px solid rgba(255,255,255,.14)", borderRadius: "var(--radius-md)", background: "linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02))", backdropFilter: "blur(8px)", transition: "transform .35s,border-color .35s", boxShadow: "0 30px 60px -34px rgba(0,0,0,.7)" }}>
                 <div style={{ position: "relative", height: 150, overflow: "hidden", background: p.previewBg }}>
                   <div aria-hidden style={{ position: "absolute", inset: 0, background: p.glow }} />
                   <div style={{ position: "absolute", left: 22, right: 22, bottom: 0, top: 26, borderRadius: "4px 4px 0 0", border: "1px solid rgba(255,255,255,.2)", background: "linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.03))", backdropFilter: "blur(4px)", padding: "13px 15px" }}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                       <span style={{ fontFamily: MONO, fontSize: 9.5, letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(255,255,255,.7)" }}>{p.name}</span>
-                      <span style={{ width: 26, height: 26, display: "grid", placeItems: "center", borderRadius: 4, background: "rgba(255,255,255,.14)", color: "#fff" }}><Ic d={p.d} /></span>
+                      <span style={{ width: 26, height: 26, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "rgba(255,255,255,.14)", color: "#fff" }}><Ic d={p.d} /></span>
                     </div>
                     <div style={{ display: "flex", alignItems: "flex-end", gap: 5, height: 52, marginTop: 14 }}><Bars seed={p.seed} accent={p.accent} /></div>
                   </div>
                   <div style={{ position: "absolute", left: 16, top: 14, display: "flex", gap: 7 }}>
                     {p.tags.map((t) => (
-                      <span key={t} style={{ fontFamily: MONO, fontSize: 9.5, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 600, background: "rgba(255,255,255,.92)", color: "#00253e", padding: "4px 9px", borderRadius: 4 }}>{t}</span>
+                      <span key={t} style={{ fontFamily: MONO, fontSize: 9.5, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 600, background: "rgba(255,255,255,.92)", color: "#00253e", padding: "4px 9px", borderRadius: "var(--radius-md)" }}>{t}</span>
                     ))}
                   </div>
                 </div>
@@ -381,8 +380,8 @@ export default function HomePage() {
                   <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 23, letterSpacing: "-.01em", margin: "0 0 8px" }}>{p.name}</h3>
                   <p style={{ margin: "0 0 22px", fontSize: 14.5, lineHeight: 1.6, color: "rgba(206,229,255,.8)" }}>{p.desc}</p>
                   <div style={{ display: "flex", gap: 12, paddingTop: 18, borderTop: "1px solid rgba(255,255,255,.12)" }}>
-                    <Link href="/contact" style={{ flex: 1, textAlign: "center", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 600, background: "var(--accent)", color: "#fff", padding: "11px 0", borderRadius: 4 }}>Enquire</Link>
-                    <Link href="/contact" style={{ flex: 1, textAlign: "center", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 600, border: "1px solid rgba(255,255,255,.28)", color: "#fff", padding: "11px 0", borderRadius: 4 }}>Live Demo</Link>
+                    <Link href="/contact" style={{ flex: 1, textAlign: "center", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 600, background: "var(--accent)", color: "#fff", padding: "11px 0", borderRadius: "var(--radius-md)" }}>Enquire</Link>
+                    <Link href="/contact" style={{ flex: 1, textAlign: "center", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 600, border: "1px solid rgba(255,255,255,.28)", color: "#fff", padding: "11px 0", borderRadius: "var(--radius-md)" }}>Live Demo</Link>
                   </div>
                 </div>
               </article>
@@ -403,7 +402,7 @@ export default function HomePage() {
             </div>
             <div className="hz-stats2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, padding: "40px 0" }}>
               {STATS.map((s) => (
-                <div key={s.label} style={{ border: "1px solid var(--border)", borderRadius: 5, background: "var(--surface)", boxShadow: "var(--shadow)", padding: "26px 24px" }}>
+                <div key={s.label} style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", boxShadow: "var(--shadow)", padding: "26px 24px" }}>
                   <div style={{ fontFamily: F, fontWeight: 600, fontSize: 40, lineHeight: 1, color: "var(--teal)" }}>{s.value}</div>
                   <div style={{ fontFamily: MONO, fontSize: 11, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--muted)", marginTop: 10 }}>{s.label}</div>
                 </div>
@@ -433,7 +432,7 @@ export default function HomePage() {
       <section id="faq" style={{ maxWidth: 920, margin: "0 auto", padding: "100px 24px 40px", scrollMarginTop: 90 }}>
         <div style={{ marginBottom: 10, fontFamily: MONO, fontSize: 12, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 600 }}>FAQ</div>
         <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(28px,3.4vw,44px)", letterSpacing: "-.02em", margin: "0 0 34px", color: "var(--ink)" }}>
-          Answers, before you <span style={{ fontStyle: "italic", color: "var(--teal)" }}>ask.</span>
+          Answers, before you <span style={{ color: "var(--teal)" }}>ask.</span>
         </h2>
         <HomeFaq />
       </section>
@@ -452,7 +451,7 @@ export default function HomePage() {
                 { href: "tel:+919489644108", text: "+91 94896 44108", tag: "IN", d: ["M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.2a2 2 0 0 1 2.1-.5c.8.4 1.7.6 2.6.7a2 2 0 0 1 1.7 2z"] },
               ].map((c) => (
                 <a key={c.href} href={c.href} className="hz-contactlink" style={{ display: "flex", alignItems: "center", gap: 14, color: "var(--ink)", fontWeight: 600, fontSize: 15 }}>
-                  <span style={{ width: 40, height: 40, display: "grid", placeItems: "center", borderRadius: 5, background: "var(--surface)", border: "1px solid var(--border)", color: "var(--teal)" }}>
+                  <span style={{ width: 40, height: 40, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "var(--surface)", border: "1px solid var(--border)", color: "var(--teal)" }}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
                       {c.rect && <rect x="2" y="4" width="20" height="16" rx="2" />}
                       {c.d.map((p, i) => (

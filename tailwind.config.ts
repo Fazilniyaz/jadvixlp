@@ -1,8 +1,7 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Jadvix design system — ported from the Google Stitch mockups.
- * MD3-style tokens: deep navy primary, teal secondary, coral accent.
+ * Jadvix design system — deep navy primary, teal secondary, warm accent.
  */
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/**/*.{ts,tsx}"],
@@ -29,28 +28,30 @@ const config: Config = {
         "outline-variant": "#c2c7ce",
       },
       fontFamily: {
-        sans: ["var(--font-jakarta)", "system-ui", "sans-serif"],
+        sans: ["var(--font-body)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        label: ["var(--font-label)", "system-ui", "monospace"],
       },
       fontSize: {
-        "display-lg": ["clamp(44px, 6vw, 72px)", { lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "800" }],
-        "display-md": ["clamp(34px, 4.5vw, 48px)", { lineHeight: "1.2", letterSpacing: "-0.03em", fontWeight: "800" }],
-        "headline-lg": ["clamp(28px, 3vw, 36px)", { lineHeight: "1.3", letterSpacing: "-0.02em", fontWeight: "700" }],
-        "headline-md": ["24px", { lineHeight: "1.4", fontWeight: "700" }],
+        "display-lg": ["clamp(44px, 6vw, 72px)", { lineHeight: "1.1", letterSpacing: "-0.03em", fontWeight: "700" }],
+        "display-md": ["clamp(34px, 4.5vw, 48px)", { lineHeight: "1.15", letterSpacing: "-0.02em", fontWeight: "700" }],
+        "headline-lg": ["clamp(28px, 3vw, 36px)", { lineHeight: "1.25", letterSpacing: "-0.015em", fontWeight: "600" }],
+        "headline-md": ["24px", { lineHeight: "1.35", fontWeight: "600" }],
         "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
         "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
         "label-md": ["14px", { lineHeight: "1.2", letterSpacing: "0.05em", fontWeight: "600" }],
       },
       maxWidth: { container: "1280px" },
-      spacing: { "section-gap": "clamp(72px, 10vw, 120px)" },
+      spacing: { "section-gap": "clamp(80px, 9vw, 128px)" },
       boxShadow: {
         card: "0 10px 30px -10px rgba(11, 59, 92, 0.08)",
         "card-lg": "0 20px 50px rgba(11, 59, 92, 0.08)",
         ambient: "0 32px 64px rgba(11, 59, 92, 0.08)",
       },
       borderRadius: {
-        "card": "24px",
-        "card-lg": "32px",
-        "card-xl": "48px",
+        "card": "16px",
+        "card-lg": "20px",
+        "card-xl": "28px",
       },
     },
   },

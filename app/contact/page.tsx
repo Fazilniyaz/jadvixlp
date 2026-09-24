@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-const F = "var(--font-fraunces),Fraunces,serif";
-const MONO = "var(--font-plex-mono),'IBM Plex Mono',monospace";
+const F = "var(--font-display),system-ui,sans-serif";
+const MONO = "var(--font-label),system-ui,sans-serif";
 
-const chip: CSSProperties = { display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: 4 };
+const chip: CSSProperties = { display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: "var(--radius-md)" };
 const flagRow: CSSProperties = { display: "flex", alignItems: "center", gap: 9, fontFamily: MONO, fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", fontWeight: 600, marginBottom: 12 };
 
 function GlobeIc() {
@@ -56,8 +56,8 @@ export default function ContactPage() {
       {/* HERO */}
       <section style={{ margin: "0 auto", padding: "80px 24px 30px", maxWidth: 820 }}>
         <span style={chip}>Let&apos;s Connect</span>
-        <h1 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(36px,4.6vw,58px)", lineHeight: 1.05, letterSpacing: "-.025em", margin: "22px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
-          Let&apos;s build the <span style={{ fontStyle: "italic", color: "var(--accent)" }}>future</span> together.
+        <h1 style={{ fontFamily: F, fontWeight: 700, fontSize: "clamp(36px,4.6vw,58px)", lineHeight: 1.05, letterSpacing: "-.025em", margin: "22px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
+          Let&apos;s build the <span style={{ color: "var(--accent)" }}>future</span> together.
         </h1>
         <p style={{ maxWidth: 620, margin: "20px 0 0", fontSize: 18, lineHeight: 1.6, color: "var(--ink-2)" }}>
           Whether you need a new website, an app, an online store or ongoing digital marketing — our team in the UK and India is ready to help. Get a free project quote today.
@@ -70,7 +70,7 @@ export default function ContactPage() {
 
         <aside style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           {/* UK */}
-          <div style={{ position: "relative", overflow: "hidden", borderRadius: 4, background: "radial-gradient(120% 120% at 85% 0%,#0b3b5c,#00253e)", color: "#fff", padding: 30 }}>
+          <div style={{ position: "relative", overflow: "hidden", borderRadius: "var(--radius-md)", background: "radial-gradient(120% 120% at 85% 0%,#0b3b5c,#00253e)", color: "#fff", padding: 30 }}>
             <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 85% 15%,rgba(57,184,253,.28),transparent 55%)" }} aria-hidden />
             <div style={{ position: "relative" }}>
               <div style={{ ...flagRow, color: "var(--sky)" }}>
@@ -86,16 +86,16 @@ export default function ContactPage() {
               </address>
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 <a href="tel:+447355803386" className="ct-uklink" style={{ display: "flex", alignItems: "center", gap: 12, color: "#fff", fontWeight: 600, fontSize: 14.5 }}>
-                  <span style={{ width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: 4, background: "rgba(255,255,255,.12)" }}><PhoneIc /></span>+44 7355 803386
+                  <span style={{ width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "rgba(255,255,255,.12)" }}><PhoneIc /></span>+44 7355 803386
                 </a>
                 <a href="mailto:contact@jadvix.uk" className="ct-uklink" style={{ display: "flex", alignItems: "center", gap: 12, color: "#fff", fontWeight: 600, fontSize: 14.5 }}>
-                  <span style={{ width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: 4, background: "rgba(255,255,255,.12)" }}><MailIc /></span>contact@jadvix.uk
+                  <span style={{ width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "rgba(255,255,255,.12)" }}><MailIc /></span>contact@jadvix.uk
                 </a>
               </div>
             </div>
           </div>
           {/* India */}
-          <div style={{ border: "1px solid var(--border)", borderRadius: 4, background: "var(--surface)", boxShadow: "var(--shadow)", padding: 30 }}>
+          <div style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", boxShadow: "var(--shadow)", padding: 30 }}>
             <div style={{ ...flagRow, color: "var(--teal)" }}>
               <GlobeIc /> India
             </div>
@@ -109,10 +109,10 @@ export default function ContactPage() {
             </address>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               <a href="tel:+919489644108" className="ct-inlink" style={{ display: "flex", alignItems: "center", gap: 12, color: "var(--ink)", fontWeight: 600, fontSize: 14.5 }}>
-                <span style={{ width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: 4, background: "var(--surface-2)" }}><PhoneIc /></span>+91 94896 44108
+                <span style={{ width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "var(--surface-2)" }}><PhoneIc /></span>+91 94896 44108
               </a>
               <a href="mailto:contact@jadvix.uk" className="ct-inlink" style={{ display: "flex", alignItems: "center", gap: 12, color: "var(--ink)", fontWeight: 600, fontSize: 14.5 }}>
-                <span style={{ width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: 4, background: "var(--surface-2)" }}><MailIc /></span>contact@jadvix.uk
+                <span style={{ width: 36, height: 36, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "var(--surface-2)" }}><MailIc /></span>contact@jadvix.uk
               </a>
             </div>
           </div>
@@ -132,7 +132,7 @@ export default function ContactPage() {
               { label: "Call UK", value: "+44 7355 803386", href: "tel:+447355803386", icon: <PhoneIc /> },
               { label: "Call India", value: "+91 94896 44108", href: "tel:+919489644108", icon: <PhoneIc /> },
             ].map((c) => (
-              <a key={c.label} href={c.href} className="ct-channel" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14, border: "1px solid var(--border)", borderRadius: 5, background: "var(--surface)", padding: 36, textAlign: "center", transition: "transform .3s,border-color .3s" }}>
+              <a key={c.label} href={c.href} className="ct-channel" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14, border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", padding: 36, textAlign: "center", transition: "transform .3s,border-color .3s" }}>
                 <span style={{ width: 60, height: 60, display: "grid", placeItems: "center", borderRadius: "50%", background: "color-mix(in srgb,var(--teal) 12%,transparent)", color: "var(--teal)" }}>{c.icon}</span>
                 <span style={{ fontWeight: 700, fontSize: 15, color: "var(--ink)" }}>{c.label}</span>
                 <span style={{ fontSize: 14, color: "var(--ink-2)" }}>{c.value}</span>
