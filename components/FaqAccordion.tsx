@@ -2,11 +2,10 @@
 
 import { useMemo, useState } from "react";
 import type { CSSProperties } from "react";
+import { PlusIcon } from "@/components/HomeFaq";
 
 export type FaqItem = { question: string; answer: string; category: string };
 
-const MONO = "var(--font-label),system-ui,sans-serif";
-const F = "var(--font-display),system-ui,sans-serif";
 
 function SearchIc() {
   return (
@@ -29,7 +28,7 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
 
   const categories = useMemo(() => Array.from(new Set(filtered.map((i) => i.category))), [filtered]);
 
-  const catLabel: CSSProperties = { fontFamily: MONO, fontSize: 12, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 600 };
+  const catLabel: CSSProperties = { color: "var(--accent-text)" };
 
   return (
     <div>
@@ -43,12 +42,12 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search FAQs, services or topics…"
           aria-label="Search frequently asked questions"
-          style={{ width: "100%", padding: "13px 16px 13px 46px", borderRadius: "var(--radius-md)" }}
+          style={{ width: "100%", padding: "14px 16px 14px 46px" }}
         />
       </div>
 
       {filtered.length === 0 && (
-        <p style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", padding: 24, fontSize: 15, color: "var(--ink-2)" }}>
+        <p className="jx-card" style={{ padding: 24, fontSize: 16, color: "var(--ink-2)", boxShadow: "none" }}>
           No results for &ldquo;{query}&rdquo;. Try a different term, or{" "}
           <a href="/contact" style={{ fontWeight: 600, color: "var(--teal)", textDecoration: "underline" }}>ask us directly</a>.
         </p>
@@ -57,8 +56,8 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
       {categories.map((category) => (
         <div key={category} style={{ marginBottom: 40 }}>
           <div style={{ marginBottom: 18, display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--accent)" }} />
-            <span style={catLabel}>{category}</span>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--brand)" }} />
+            <span className="jx-label" style={catLabel}>{category}</span>
           </div>
           <div>
             {filtered
@@ -67,7 +66,7 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
                 const globalIndex = items.indexOf(item);
                 const open = openIndex === globalIndex;
                 return (
-                  <div key={item.question} style={{ borderTop: "1px solid var(--border)" }}>
+                  <div key={item.question} style={{ borderTop: "1px solid var(--line)" }}>
                     <button
                       type="button"
                       onClick={() => setOpenIndex(open ? null : globalIndex)}
@@ -82,17 +81,17 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
                         background: "transparent",
                         border: "none",
                         cursor: "pointer",
-                        padding: "20px 4px",
+                        padding: "22px 2px",
                         color: "var(--ink)",
-                        fontFamily: F,
-                        fontSize: 17,
+                        fontFamily: "var(--font-body),system-ui,sans-serif",
+                        fontSize: 18,
                         fontWeight: 600,
                       }}
                     >
                       <span>{item.question}</span>
-                      <span style={{ flexShrink: 0, color: open ? "var(--accent)" : "var(--muted)", fontFamily: MONO, fontSize: 22, lineHeight: 1 }}>{open ? "−" : "+"}</span>
+                      <PlusIcon open={open} />
                     </button>
-                    {open && <p style={{ margin: 0, padding: "0 4px 22px", maxWidth: 700, fontSize: 15, lineHeight: 1.65, color: "var(--ink-2)" }}>{item.answer}</p>}
+                    {open && <p className="jx-fade-in" style={{ margin: 0, padding: "0 2px 24px", maxWidth: 700, fontSize: 16, lineHeight: 1.65, color: "var(--ink-2)" }}>{item.answer}</p>}
                   </div>
                 );
               })}

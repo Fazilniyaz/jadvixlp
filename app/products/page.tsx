@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import JxCta from "@/components/JxCta";
+import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Our Products — Jadvix Shop, Academy, RotaPay & PayRoto",
@@ -10,12 +11,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/products" },
 };
 
-const F = "var(--font-display),system-ui,sans-serif";
-const MONO = "var(--font-label),system-ui,sans-serif";
-
-function Ic({ d }: { d: string[] }) {
+function Ic({ d, s = 18 }: { d: string[]; s?: number }) {
   return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+    <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       {d.map((p, i) => (
         <path key={i} d={p} />
       ))}
@@ -24,25 +22,25 @@ function Ic({ d }: { d: string[] }) {
 }
 
 const BAR_H = [45, 68, 52, 82, 60, 74];
-function Bars({ seed, accent }: { seed: number; accent: string }) {
+function Bars({ seed }: { seed: number }) {
   return (
-    <>
-      {BAR_H.map((v, i) => (
-        <div key={i} style={{ flex: 1, height: `${v}%`, borderRadius: 3, background: i === seed ? accent : "rgba(255,255,255,.2)" }} />
-      ))}
-    </>
+    <svg width="100%" height="60" viewBox="0 0 184 56" preserveAspectRatio="xMinYMax meet" aria-hidden>
+      {BAR_H.map((v, i) => {
+        const h = (v / 100) * 54;
+        return <rect key={i} x={1 + i * 32} y={55 - h} width={20} height={h} rx={4} fill={i === seed ? "var(--brand)" : "none"} stroke="var(--brand)" strokeOpacity={i === seed ? 1 : 0.45} strokeWidth={1.5} />;
+      })}
+    </svg>
   );
 }
 
 const PRODUCTS = [
-  { name: "Jadvix Shop", tags: ["Web App", "Ecommerce"], desc: "A curated marketplace for digital products and services — built for modern businesses that want to launch and sell fast.", previewBg: "radial-gradient(120% 120% at 0% 0%,#0b3b5c,#006591)", glow: "radial-gradient(circle at 75% 25%,rgba(57,184,253,.45),transparent 60%)", d: ["M6 6h15l-1.5 9h-12z", "M6 6 5 2H2", "M9 20h.01", "M18 20h.01"], seed: 3, accent: "#39b8fd" },
-  { name: "Jadvix Academy", tags: ["Platform", "Education"], desc: "Practical learning paths in IT, digital marketing and design — with internships on real projects and a route into the Jadvix team.", previewBg: "radial-gradient(120% 120% at 0% 0%,#006591,#39b8fd)", glow: "radial-gradient(circle at 75% 25%,rgba(255,255,255,.35),transparent 60%)", d: ["M22 10 12 5 2 10l10 5 10-5z", "M6 12v5c0 1 3 2.5 6 2.5s6-1.5 6-2.5v-5"], seed: 5, accent: "#ffffff" },
-  { name: "RotaPay", tags: ["SaaS", "Workforce"], desc: "Shift, rota and pay management for teams — schedule work, track earnings and generate reports from one clean dashboard.", previewBg: "radial-gradient(120% 120% at 0% 0%,#00253e,#0b3b5c)", glow: "radial-gradient(circle at 75% 25%,rgba(255,124,57,.4),transparent 60%)", d: ["M3 3v18h18", "M7 15l3-4 3 2 4-6"], seed: 3, accent: "#ff7c39" },
-  { name: "PayRoto", tags: ["Web App", "B2B"], desc: "Fast, simple payment workflows for growing businesses — reconciliation and reporting without the spreadsheet chaos.", previewBg: "radial-gradient(120% 120% at 0% 0%,#642400,#ff7c39)", glow: "radial-gradient(circle at 75% 25%,rgba(255,219,205,.45),transparent 60%)", d: ["M13 2 3 14h7l-1 8 10-12h-7z"], seed: 4, accent: "#ffd8c5" },
+  { name: "Jadvix Shop", tags: ["Web App", "Ecommerce"], desc: "A curated marketplace for digital products and services — built for modern businesses that want to launch and sell fast.", d: ["M6 6h15l-1.5 9h-12z", "M6 6 5 2H2", "M9 20h.01", "M18 20h.01"], seed: 3 },
+  { name: "Jadvix Academy", tags: ["Platform", "Education"], desc: "Practical learning paths in IT, digital marketing and design — with internships on real projects and a route into the Jadvix team.", d: ["M22 10 12 5 2 10l10 5 10-5z", "M6 12v5c0 1 3 2.5 6 2.5s6-1.5 6-2.5v-5"], seed: 5 },
+  { name: "RotaPay", tags: ["SaaS", "Workforce"], desc: "Shift, rota and pay management for teams — schedule work, track earnings and generate reports from one clean dashboard.", d: ["M3 3v18h18", "M7 15l3-4 3 2 4-6"], seed: 3 },
+  { name: "PayRoto", tags: ["Web App", "B2B"], desc: "Fast, simple payment workflows for growing businesses — reconciliation and reporting without the spreadsheet chaos.", d: ["M13 2 3 14h7l-1 8 10-12h-7z"], seed: 4 },
 ];
 
-const chip: CSSProperties = { display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: "var(--radius-md)" };
-const btnMono: CSSProperties = { flex: 1, textAlign: "center", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 600, padding: "12px 0", borderRadius: "var(--radius-md)" };
+const art = { fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 
 export default function ProductsPage() {
   return (
@@ -50,41 +48,48 @@ export default function ProductsPage() {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        .pr-btn-navy:hover{background:var(--navy-2)!important}
-        .pr-btn-ghost:hover{border-color:var(--accent)!important;color:var(--accent)!important}
-        @media(max-width:900px){.pr-hero{grid-template-columns:1fr!important}.pr-grid{grid-template-columns:1fr!important}}
+        .pr-hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:64px;align-items:center}
+        .pr-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+        @media(max-width:900px){.pr-hero,.pr-grid{grid-template-columns:1fr}.pr-hero{gap:56px}}
       `,
         }}
       />
 
       {/* HERO */}
-      <section className="pr-hero" style={{ maxWidth: 1280, margin: "0 auto", padding: "80px 24px 60px", display: "grid", gridTemplateColumns: "1.15fr .85fr", gap: 56, alignItems: "center" }}>
+      <section className="jx-wrap pr-hero" style={{ paddingTop: "clamp(72px,10vh,120px)", paddingBottom: "clamp(80px,11vh,130px)" }}>
         <div>
-          <span style={chip}>Innovation Hub</span>
-          <h1 style={{ fontFamily: F, fontWeight: 700, fontSize: "clamp(38px,5vw,66px)", lineHeight: 1.03, letterSpacing: "-.025em", margin: "24px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
-            Propelling <span style={{ color: "var(--accent)" }}>digital</span> futures.
+          <span className="jx-eyebrow jx-rise">Innovation Hub</span>
+          <h1 className="jx-display-xl jx-rise" style={{ ["--d" as string]: "80ms", margin: "24px 0 0", color: "var(--ink)" } as CSSProperties}>
+            Propelling <span className="jx-accent">digital</span> futures.
           </h1>
-          <p style={{ maxWidth: 520, margin: "22px 0 0", fontSize: 18, lineHeight: 1.6, color: "var(--ink-2)" }}>
+          <p className="jx-body-lg jx-rise" style={{ ["--d" as string]: "200ms", maxWidth: 540, margin: "24px 0 0", color: "var(--ink-2)" } as CSSProperties}>
             Explore our ecosystem of tools designed to simplify complex workflows, accelerate growth and put enterprise-grade software in reach of every business.
           </p>
-          <div style={{ display: "flex", gap: 14, marginTop: 32, flexWrap: "wrap" }}>
-            <Link href="/contact" className="pr-btn-navy" style={{ background: "var(--navy)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: "var(--radius-md)" }}>Talk to Us</Link>
-            <Link href="/ideas" className="pr-btn-ghost" style={{ border: "1px solid var(--border)", color: "var(--ink)", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: "var(--radius-md)", background: "var(--surface)" }}>Join Academy</Link>
+          <div className="jx-rise" style={{ ["--d" as string]: "320ms", display: "flex", gap: 12, marginTop: 36, flexWrap: "wrap" } as CSSProperties}>
+            <Link href="/contact" className="jx-btn jx-btn-spark">Talk to Us</Link>
+            <Link href="/ideas" className="jx-btn jx-btn-ghost">Join Academy</Link>
           </div>
         </div>
-        <div style={{ position: "relative" }} aria-hidden>
-          <div style={{ position: "relative", aspectRatio: "1", borderRadius: "var(--radius-md)", overflow: "hidden", background: "radial-gradient(120% 120% at 30% 20%,#0b3b5c,#00253e 60%,#001322)", boxShadow: "var(--shadow-lg)", border: "1px solid rgba(255,255,255,.12)" }}>
-            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 30% 30%,rgba(57,184,253,.4),transparent 55%),radial-gradient(circle at 75% 70%,rgba(255,124,57,.32),transparent 50%)" }} />
-            <div className="animate-spin-slow" style={{ position: "absolute", left: "50%", top: "50%", width: 190, height: 190, transform: "translate(-50%,-50%) rotate(45deg)", border: "1.5px solid rgba(255,255,255,.22)", borderRadius: "var(--radius-md)" }} />
-            <div style={{ position: "absolute", left: "50%", top: "50%", width: 96, height: 96, transform: "translate(-50%,-50%) rotate(45deg)", borderRadius: "var(--radius-md)", background: "rgba(255,255,255,.1)", backdropFilter: "blur(6px)", border: "1px solid rgba(255,255,255,.2)" }} />
+        <div className="jx-rise" style={{ ["--d" as string]: "240ms", position: "relative" } as CSSProperties} aria-hidden>
+          <div className="jx-navy jx-panel" style={{ aspectRatio: "1", boxShadow: "var(--shadow-glow)", color: "var(--brand)" }}>
+            <div className="jx-glow" style={{ top: "-30%", left: "-30%" }} />
+            <svg viewBox="0 0 400 400" width="100%" height="100%" style={{ position: "absolute", inset: 0 }}>
+              <g {...art}>
+                <g className="jx-spin">
+                  <rect x="120" y="120" width="160" height="160" rx="20" transform="rotate(45 200 200)" strokeOpacity=".4" />
+                </g>
+                <rect x="160" y="160" width="80" height="80" rx="14" transform="rotate(45 200 200)" strokeOpacity=".9" />
+                <circle cx="200" cy="200" r="150" strokeOpacity=".18" strokeDasharray="2 8" />
+              </g>
+            </svg>
           </div>
-          <div className="jx-float" style={{ position: "absolute", bottom: -22, left: -18, display: "flex", alignItems: "center", gap: 14, background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "16px 20px", boxShadow: "var(--shadow-lg)" }}>
-            <span style={{ width: 44, height: 44, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "var(--accent)", color: "#fff" }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z" /></svg>
+          <div className="jx-card" style={{ position: "absolute", bottom: -26, left: -20, display: "flex", alignItems: "center", gap: 14, padding: "16px 20px" }}>
+            <span className="jx-icon-tile" style={{ width: 44, height: 44 }}>
+              <Ic s={20} d={["M13 2 3 14h7l-1 8 10-12h-7z"]} />
             </span>
             <div>
-              <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--muted)" }}>Built In-House</div>
-              <div style={{ fontFamily: F, fontWeight: 600, fontSize: 22, color: "var(--ink)" }}>4 Products</div>
+              <div className="jx-label" style={{ fontSize: 11, color: "var(--ink-2)" }}>Built In-House</div>
+              <div className="font-display" style={{ fontWeight: 600, fontSize: 22, color: "var(--ink)" }}>4 Products</div>
             </div>
           </div>
         </div>
@@ -92,48 +97,46 @@ export default function ProductsPage() {
 
       {/* PRODUCT GRID */}
       <section style={{ background: "var(--surface-2)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "80px 24px 90px" }}>
-          <div style={{ marginBottom: 44 }}>
-            <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 600 }}>Our Ecosystem</div>
-            <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(28px,3.4vw,42px)", letterSpacing: "-.02em", margin: "14px 0 0", color: "var(--ink)" }}>One design language, four products.</h2>
-          </div>
-          <div className="pr-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 22 }}>
-            {PRODUCTS.map((p) => (
-              <article key={p.name} className="jx-card" style={{ display: "flex", flexDirection: "column", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", boxShadow: "var(--shadow)", overflow: "hidden" }}>
-                <div style={{ position: "relative", height: 180, overflow: "hidden", background: p.previewBg }} aria-hidden>
-                  <div style={{ position: "absolute", inset: 0, background: p.glow }} />
-                  <div style={{ position: "absolute", left: 24, right: 24, bottom: 0, top: 30, borderRadius: "5px 5px 0 0", border: "1px solid rgba(255,255,255,.2)", background: "linear-gradient(160deg,rgba(255,255,255,.15),rgba(255,255,255,.03))", backdropFilter: "blur(4px)", padding: "15px 17px" }}>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                      <span style={{ fontFamily: MONO, fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(255,255,255,.72)" }}>{p.name}</span>
-                      <span style={{ width: 28, height: 28, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "rgba(255,255,255,.16)", color: "#fff" }}>
+        <div className="jx-wrap jx-section">
+          <Reveal style={{ marginBottom: 52 }}>
+            <span className="jx-eyebrow" style={{ background: "var(--surface)" }}>Our Ecosystem</span>
+            <h2 className="jx-display-lg" style={{ margin: "20px 0 0", color: "var(--ink)" }}>One design language, four products.</h2>
+          </Reveal>
+          <div className="pr-grid">
+            {PRODUCTS.map((p, i) => (
+              <Reveal key={p.name} delay={(i % 2) * 80}>
+                <article className="jx-card jx-hover" style={{ height: "100%", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+                  <div className="jx-art" style={{ padding: "22px 26px 24px" }}>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+                      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                        {p.tags.map((tag) => (
+                          <span key={tag} className="jx-tag">{tag}</span>
+                        ))}
+                      </div>
+                      <span className="jx-icon-tile" style={{ width: 40, height: 40, borderRadius: 10, color: "var(--brand)" }}>
                         <Ic d={p.d} />
                       </span>
                     </div>
-                    <div style={{ display: "flex", alignItems: "flex-end", gap: 6, height: 56, marginTop: 16 }}>
-                      <Bars seed={p.seed} accent={p.accent} />
+                    <div style={{ marginTop: 24 }}>
+                      <Bars seed={p.seed} />
                     </div>
                   </div>
-                  <div style={{ position: "absolute", left: 18, top: 16, display: "flex", gap: 7 }}>
-                    {p.tags.map((tag) => (
-                      <span key={tag} style={{ fontFamily: MONO, fontSize: 9.5, letterSpacing: ".06em", textTransform: "uppercase", fontWeight: 600, background: "rgba(255,255,255,.94)", color: "#00253e", padding: "4px 9px", borderRadius: "var(--radius-md)" }}>{tag}</span>
-                    ))}
+                  <div style={{ padding: 28, display: "flex", flexDirection: "column", flex: 1 }}>
+                    <h3 className="jx-headline" style={{ margin: "0 0 10px", color: "var(--ink)" }}>{p.name}</h3>
+                    <p style={{ margin: "0 0 26px", fontSize: 16, lineHeight: 1.6, color: "var(--ink-2)", flex: 1 }}>{p.desc}</p>
+                    <div style={{ display: "flex", gap: 10 }}>
+                      <Link href="/contact" className="jx-btn jx-btn-primary jx-btn-sm" style={{ flex: 1 }}>Enquire Now</Link>
+                      <Link href="/contact" className="jx-btn jx-btn-ghost jx-btn-sm" style={{ flex: 1 }}>Request Demo</Link>
+                    </div>
                   </div>
-                </div>
-                <div style={{ padding: 26, display: "flex", flexDirection: "column", flex: 1 }}>
-                  <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 24, letterSpacing: "-.01em", margin: "0 0 8px", color: "var(--ink)" }}>{p.name}</h3>
-                  <p style={{ margin: "0 0 24px", fontSize: 14.5, lineHeight: 1.6, color: "var(--ink-2)", flex: 1 }}>{p.desc}</p>
-                  <div style={{ display: "flex", gap: 12, paddingTop: 18, borderTop: "1px solid var(--border)" }}>
-                    <Link href="/contact" className="pr-btn-navy" style={{ ...btnMono, background: "var(--navy)", color: "#fff" }}>Enquire Now</Link>
-                    <Link href="/contact" className="pr-btn-ghost" style={{ ...btnMono, border: "1px solid var(--border)", color: "var(--ink)" }}>Request Demo</Link>
-                  </div>
-                </div>
-              </article>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <div style={{ paddingTop: 90 }}>
+      <div style={{ paddingTop: "var(--section-gap)" }}>
         <JxCta
           title="Ready to build the future?"
           body="Whether you need a custom solution or want to adopt our existing ecosystem, our team is ready to help."

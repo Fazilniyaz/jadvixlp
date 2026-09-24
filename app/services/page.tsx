@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import type { CSSProperties } from "react";
 import JxCta from "@/components/JxCta";
+import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "IT Services — Web Development, Apps, Ecommerce, SEO & Consultancy",
@@ -10,12 +10,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/services" },
 };
 
-const F = "var(--font-display),system-ui,sans-serif";
-const MONO = "var(--font-label),system-ui,sans-serif";
-
 function Ic({ d, sw = 1.5, size = 22 }: { d: string[]; sw?: number; size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       {d.map((p, i) => (
         <path key={i} d={p} />
       ))}
@@ -40,9 +37,7 @@ const WHY = [
   { title: "Data-Driven Insights", body: "Strategy backed by hard numbers — we measure and optimise every touchpoint." },
 ];
 
-const chip: CSSProperties = { display: "inline-block", fontFamily: MONO, fontSize: 11.5, letterSpacing: ".16em", textTransform: "uppercase", fontWeight: 600, color: "var(--teal)", border: "1px solid var(--border)", padding: "7px 14px", borderRadius: "var(--radius-md)" };
-const btnNavy: CSSProperties = { background: "var(--navy)", color: "#fff", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: "var(--radius-md)" };
-const btnGhost: CSSProperties = { border: "1px solid var(--border)", color: "var(--ink)", fontWeight: 600, fontSize: 15, padding: "14px 26px", borderRadius: "var(--radius-md)", background: "var(--surface)" };
+const art = { fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 
 export default function ServicesPage() {
   return (
@@ -50,129 +45,139 @@ export default function ServicesPage() {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        .svc-btn-navy:hover{background:var(--navy-2)!important}
-        .svc-btn-ghost:hover{border-color:var(--accent)!important;color:var(--accent)!important}
-        @media(max-width:900px){.svc-hero,.svc-why{grid-template-columns:1fr!important}.svc-pillars{grid-template-columns:repeat(2,1fr)!important}}
-        @media(max-width:560px){.svc-pillars{grid-template-columns:1fr!important}.svc-why-imgs{grid-template-columns:1fr!important}}
+        .svc-hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:56px;align-items:center}
+        .svc-why{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:center}
+        .svc-pillars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+        .svc-why-imgs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        @media(max-width:900px){.svc-hero,.svc-why{grid-template-columns:1fr;gap:48px}.svc-pillars{grid-template-columns:repeat(2,minmax(0,1fr))}}
+        @media(max-width:560px){.svc-pillars{grid-template-columns:1fr}.svc-why-imgs{grid-template-columns:1fr}}
       `,
         }}
       />
 
       {/* HERO */}
-      <section className="svc-hero" style={{ maxWidth: 1280, margin: "0 auto", padding: "80px 24px 40px", display: "grid", gridTemplateColumns: "1.1fr .9fr", gap: 56, alignItems: "center" }}>
+      <section className="jx-wrap svc-hero" style={{ paddingTop: "clamp(72px,10vh,120px)", paddingBottom: "clamp(72px,10vh,120px)" }}>
         <div>
-          <span style={chip}>Innovation Redefined</span>
-          <h1 style={{ fontFamily: F, fontWeight: 700, fontSize: "clamp(38px,5vw,66px)", lineHeight: 1.03, letterSpacing: "-.025em", margin: "24px 0 0", color: "var(--ink)", textWrap: "balance" } as CSSProperties}>
+          <span className="jx-eyebrow jx-rise">Innovation Redefined</span>
+          <h1 className="jx-display-xl jx-rise" style={{ ["--d" as string]: "80ms", margin: "24px 0 0", color: "var(--ink)" } as React.CSSProperties}>
             Our expertise,
             <br />
-            your <span style={{ color: "var(--accent)" }}>advantage.</span>
+            your <span className="jx-accent">advantage.</span>
           </h1>
-          <p style={{ maxWidth: 500, margin: "22px 0 0", fontSize: 18, lineHeight: 1.6, color: "var(--ink-2)" }}>
+          <p className="jx-body-lg jx-rise" style={{ ["--d" as string]: "200ms", maxWidth: 520, margin: "24px 0 0", color: "var(--ink-2)" } as React.CSSProperties}>
             End-to-end IT solutions — from your first website to enterprise software, and from launch-day marketing to long-term security. One accountable team across the UK and India.
           </p>
-          <div style={{ display: "flex", gap: 14, marginTop: 32, flexWrap: "wrap" }}>
-            <Link href="/contact" className="svc-btn-navy" style={btnNavy}>Start a Conversation</Link>
-            <Link href="/products" className="svc-btn-ghost" style={btnGhost}>See Our Products</Link>
+          <div className="jx-rise" style={{ ["--d" as string]: "320ms", display: "flex", gap: 12, marginTop: 36, flexWrap: "wrap" } as React.CSSProperties}>
+            <Link href="/contact" className="jx-btn jx-btn-spark">Start a Conversation</Link>
+            <Link href="/products" className="jx-btn jx-btn-ghost">See Our Products</Link>
           </div>
         </div>
-        <div style={{ position: "relative", perspective: 1400 }} aria-hidden>
-          <div style={{ position: "relative", transform: "rotateY(-12deg) rotateX(6deg)", transformStyle: "preserve-3d", borderRadius: "var(--radius-md)", overflow: "hidden", background: "radial-gradient(120% 120% at 100% 0%,#0b3b5c,#00253e)", boxShadow: "var(--shadow-lg)", border: "1px solid rgba(255,255,255,.14)" }}>
-            <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 25% 20%,rgba(57,184,253,.35),transparent 55%),radial-gradient(circle at 85% 85%,rgba(255,124,57,.25),transparent 50%)" }} />
-            <div style={{ position: "relative", padding: 28 }}>
-              <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(206,229,255,.6)" }}>Service Stack</div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 11, marginTop: 16 }}>
-                {[
-                  ["Website Design & Development", "var(--sky)"],
-                  ["Mobile & Web Apps", "var(--accent)"],
-                  ["Digital Marketing & SEO", "var(--sky)"],
-                  ["Cybersecurity & Cloud", "var(--accent)"],
-                ].map(([label, dot]) => (
-                  <div key={label} style={{ display: "flex", alignItems: "center", gap: 12, background: "rgba(255,255,255,.09)", border: "1px solid rgba(255,255,255,.14)", borderRadius: "var(--radius-md)", padding: "13px 15px" }}>
-                    <span style={{ width: 9, height: 9, borderRadius: 2, background: dot }} />
-                    <span style={{ color: "#fff", fontSize: 14, fontWeight: 500 }}>{label}</span>
+        <div className="jx-rise" style={{ ["--d" as string]: "240ms", position: "relative" } as React.CSSProperties} aria-hidden>
+          <div className="jx-navy jx-panel" style={{ padding: "32px 32px 88px", boxShadow: "var(--shadow-glow)" }}>
+            <div className="jx-glow" style={{ width: 420, height: 420, top: "-40%", right: "-30%" }} />
+            <div style={{ position: "relative" }}>
+              <div className="jx-label" style={{ color: "var(--on-navy-2)" }}>Service Stack</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 18 }}>
+                {["Website Design & Development", "Mobile & Web Apps", "Digital Marketing & SEO", "Cybersecurity & Cloud"].map((label) => (
+                  <div key={label} style={{ display: "flex", alignItems: "center", gap: 12, border: "1px solid var(--line-navy)", borderRadius: 12, padding: "14px 16px" }}>
+                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--brand)" }} />
+                    <span style={{ color: "#fff", fontSize: 15, fontWeight: 500 }}>{label}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-          <div className="jx-float" style={{ position: "absolute", bottom: -24, left: -18, background: "var(--surface)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", padding: "18px 22px", boxShadow: "var(--shadow-lg)" }}>
-            <div style={{ fontFamily: F, fontWeight: 600, fontSize: 24, color: "var(--ink)" }}>UK + India</div>
-            <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--muted)", marginTop: 4 }}>One Delivery Team</div>
+          <div className="jx-card" style={{ position: "absolute", bottom: -28, left: -20, padding: "18px 22px" }}>
+            <div className="font-display" style={{ fontWeight: 600, fontSize: 24, color: "var(--ink)" }}>UK + India</div>
+            <div className="jx-label" style={{ fontSize: 11.5, color: "var(--ink-2)", marginTop: 4 }}>One Delivery Team</div>
           </div>
         </div>
       </section>
 
       {/* PILLARS */}
-      <section style={{ background: "var(--surface-2)", marginTop: 60 }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "90px 24px" }}>
-          <div style={{ textAlign: "center", maxWidth: 640, margin: "0 auto 52px" }}>
-            <div style={{ fontFamily: MONO, fontSize: 12, letterSpacing: ".16em", textTransform: "uppercase", color: "var(--teal)", fontWeight: 600 }}>Strategic Service Pillars</div>
-            <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(28px,3.4vw,42px)", letterSpacing: "-.02em", margin: "14px 0 12px", color: "var(--ink)" }}>Everything you need, under one roof.</h2>
-            <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: "var(--ink-2)" }}>Eight disciplines, one accountable team — tailored to accelerate your digital growth.</p>
-          </div>
-          <div className="svc-pillars" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 18 }}>
-            {SERVICES.map((s) => (
-              <article key={s.title} className="jx-card" style={{ border: "1px solid var(--border)", borderRadius: "var(--radius-md)", background: "var(--surface)", boxShadow: "var(--shadow)", padding: 26 }}>
-                <div style={{ width: 48, height: 48, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "color-mix(in srgb,var(--teal) 12%,transparent)", color: "var(--teal)", marginBottom: 16 }}>
-                  <Ic d={s.d} />
-                </div>
-                <h3 style={{ fontFamily: F, fontWeight: 600, fontSize: 18, margin: "0 0 7px", color: "var(--ink)" }}>{s.title}</h3>
-                <p style={{ margin: 0, fontSize: 13.5, lineHeight: 1.55, color: "var(--ink-2)" }}>{s.desc}</p>
-              </article>
+      <section style={{ background: "var(--surface-2)" }}>
+        <div className="jx-wrap jx-section">
+          <Reveal style={{ textAlign: "center", maxWidth: 720, margin: "0 auto 56px" }}>
+            <span className="jx-eyebrow" style={{ background: "var(--surface)" }}>Strategic Service Pillars</span>
+            <h2 className="jx-display-lg" style={{ margin: "20px 0 16px", color: "var(--ink)" }}>Everything you need, under one roof.</h2>
+            <p className="jx-body-lg" style={{ margin: 0, color: "var(--ink-2)" }}>Eight disciplines, one accountable team — tailored to accelerate your digital growth.</p>
+          </Reveal>
+          <div className="svc-pillars">
+            {SERVICES.map((s, i) => (
+              <Reveal key={s.title} delay={(i % 4) * 70}>
+                <article className="jx-card jx-hover" style={{ height: "100%", padding: 28 }}>
+                  <div className="jx-icon-tile" style={{ marginBottom: 20 }}>
+                    <Ic d={s.d} />
+                  </div>
+                  <h3 className="font-display" style={{ fontWeight: 600, fontSize: 19, letterSpacing: "-.01em", margin: "0 0 8px", color: "var(--ink)" }}>{s.title}</h3>
+                  <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: "var(--ink-2)" }}>{s.desc}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* WHY CHOOSE */}
-      <section style={{ maxWidth: 1280, margin: "0 auto", padding: "90px 24px" }}>
-        <div className="svc-why" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }}>
-          <div>
-            <h2 style={{ fontFamily: F, fontWeight: 600, fontSize: "clamp(28px,3.4vw,42px)", letterSpacing: "-.02em", margin: "0 0 18px", color: "var(--ink)" }}>Why choose Jadvix?</h2>
-            <p style={{ margin: "0 0 32px", fontSize: 17, lineHeight: 1.6, color: "var(--ink-2)" }}>We don&apos;t just deliver projects; we build digital legacies. Our approach combines agency agility with enterprise-grade stability.</p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+      <section className="jx-wrap jx-section">
+        <div className="svc-why">
+          <Reveal>
+            <h2 className="jx-display-lg" style={{ margin: "0 0 20px", color: "var(--ink)" }}>Why choose Jadvix?</h2>
+            <p className="jx-body-lg" style={{ margin: "0 0 36px", color: "var(--ink-2)" }}>We don&apos;t just deliver projects; we build digital legacies. Our approach combines agency agility with enterprise-grade stability.</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
               {WHY.map((w) => (
                 <div key={w.title} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
-                  <span style={{ flexShrink: 0, width: 26, height: 26, display: "grid", placeItems: "center", borderRadius: "var(--radius-md)", background: "color-mix(in srgb,var(--teal) 16%,transparent)", color: "var(--teal)", marginTop: 2 }}>
-                    <Ic d={["M20 6 9 17l-5-5"]} sw={2.4} size={15} />
+                  <span style={{ flexShrink: 0, width: 28, height: 28, display: "grid", placeItems: "center", borderRadius: 999, background: "color-mix(in srgb,var(--brand) 14%,transparent)", color: "var(--accent-text)", marginTop: 1 }}>
+                    <Ic d={["M20 6 9 17l-5-5"]} sw={2} size={14} />
                   </span>
                   <div>
-                    <h3 style={{ margin: "0 0 4px", fontSize: 15, fontWeight: 700, color: "var(--ink)" }}>{w.title}</h3>
-                    <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: "var(--ink-2)" }}>{w.body}</p>
+                    <h3 style={{ margin: "0 0 4px", fontFamily: "var(--font-body),system-ui,sans-serif", fontSize: 17, fontWeight: 700, color: "var(--ink)" }}>{w.title}</h3>
+                    <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6, color: "var(--ink-2)" }}>{w.body}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <Link href="/contact" className="svc-btn-navy" style={{ display: "inline-block", marginTop: 32, ...btnNavy }}>Start a Conversation</Link>
-          </div>
-          <div className="svc-why-imgs" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }} aria-hidden>
+            <Link href="/contact" className="jx-btn jx-btn-primary" style={{ marginTop: 36 }}>Start a Conversation</Link>
+          </Reveal>
+          <div className="svc-why-imgs" aria-hidden>
             <div style={{ display: "flex", flexDirection: "column", gap: 16, marginTop: 40 }}>
-              <div style={{ position: "relative", overflow: "hidden", height: 200, borderRadius: "var(--radius-md)", background: "radial-gradient(120% 120% at 60% 40%,#0b3b5c,#00253e)", border: "1px solid var(--border)" }}>
-                <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 60% 40%,rgba(57,184,253,.35),transparent 60%)" }} />
-                <svg style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)" }} width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3 3v18h18" />
-                  <path d="M7 15l3-4 3 2 4-6" />
-                </svg>
-              </div>
-              <div style={{ borderRadius: "var(--radius-md)", background: "var(--accent)", color: "#fff", padding: 26 }}>
-                <div style={{ fontFamily: F, fontWeight: 600, fontSize: 26 }}>2 Offices</div>
-                <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", opacity: 0.85, marginTop: 6 }}>UK & India</div>
-              </div>
+              <Reveal>
+                <div className="jx-art" style={{ height: 200, borderRadius: "var(--r-card)" }}>
+                  <svg viewBox="0 0 200 200" width="100%" height="100%">
+                    <g {...art}>
+                      <path d="M60 60v80h80" strokeOpacity=".5" />
+                      <path d="M76 120l20-26 20 12 24-34" />
+                      <circle cx="140" cy="72" r="4" />
+                    </g>
+                  </svg>
+                </div>
+              </Reveal>
+              <Reveal delay={80}>
+                <div className="jx-card" style={{ padding: 26 }}>
+                  <div className="font-display jx-num" style={{ fontWeight: 600, fontSize: 28, color: "var(--ink)" }}>2 Offices</div>
+                  <div className="jx-label" style={{ fontSize: 11.5, color: "var(--ink-2)", marginTop: 6 }}>UK & India</div>
+                </div>
+              </Reveal>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <div style={{ borderRadius: "var(--radius-md)", background: "var(--navy-2)", color: "#fff", padding: 26 }}>
-                <div style={{ fontFamily: F, fontWeight: 600, fontSize: 26 }}>8+</div>
-                <div style={{ fontFamily: MONO, fontSize: 10, letterSpacing: ".12em", textTransform: "uppercase", opacity: 0.85, marginTop: 6 }}>Disciplines</div>
-              </div>
-              <div style={{ position: "relative", overflow: "hidden", height: 250, borderRadius: "var(--radius-md)", background: "radial-gradient(120% 120% at 40% 70%,#0b3b5c,#00253e)", border: "1px solid var(--border)" }}>
-                <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 40% 70%,rgba(255,124,57,.28),transparent 55%)" }} />
-                <svg style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)" }} width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="9" cy="7" r="3" />
-                  <path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2" />
-                  <circle cx="18" cy="8" r="2.5" />
-                  <path d="M22 21v-1a4 4 0 0 0-3-3.8" />
-                </svg>
-              </div>
+              <Reveal delay={60}>
+                <div className="jx-card" style={{ padding: 26 }}>
+                  <div className="font-display jx-num" style={{ fontWeight: 600, fontSize: 28, color: "var(--ink)" }}>8+</div>
+                  <div className="jx-label" style={{ fontSize: 11.5, color: "var(--ink-2)", marginTop: 6 }}>Disciplines</div>
+                </div>
+              </Reveal>
+              <Reveal delay={140}>
+                <div className="jx-art" style={{ height: 250, borderRadius: "var(--r-card)" }}>
+                  <svg viewBox="0 0 200 250" width="100%" height="100%">
+                    <g {...art}>
+                      <circle cx="84" cy="104" r="16" />
+                      <path d="M52 168v-8a24 24 0 0 1 24-24h16a24 24 0 0 1 24 24v8" />
+                      <circle cx="132" cy="110" r="12" strokeOpacity=".55" />
+                      <path d="M150 168v-4a18 18 0 0 0-12-17" strokeOpacity=".55" />
+                    </g>
+                  </svg>
+                </div>
+              </Reveal>
             </div>
           </div>
         </div>

@@ -29,8 +29,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Toggle light/dark theme"
-      className="jx-lift"
-      style={{ display: "grid", placeItems: "center", width: 38, height: 38, border: "1px solid var(--border)", borderRadius: "var(--radius-sm)", background: "var(--surface)", color: "var(--ink)", cursor: "pointer" }}
+      className="jx-iconbtn"
     >
       {theme === "dark" ? (
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">

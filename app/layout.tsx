@@ -1,18 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Hanken_Grotesk, Space_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
+import { Space_Grotesk } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
-const display = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+// Display: Clash Display (Fontshare, self-hosted), headings only, 500–600.
+const display = localFont({
+  src: [
+    { path: "./fonts/ClashDisplay-Medium.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/ClashDisplay-Semibold.woff2", weight: "600", style: "normal" },
+  ],
   display: "swap",
   variable: "--font-display",
 });
-const body = Hanken_Grotesk({ subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap", variable: "--font-body" });
-const label = Space_Grotesk({ subsets: ["latin"], weight: ["500", "600", "700"], display: "swap", variable: "--font-label" });
+// Body/UI: Satoshi (Fontshare, self-hosted).
+const body = localFont({
+  src: [
+    { path: "./fonts/Satoshi-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Satoshi-Medium.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/Satoshi-Bold.woff2", weight: "700", style: "normal" },
+  ],
+  display: "swap",
+  variable: "--font-body",
+});
+// Micro-labels / eyebrows only.
+const label = Space_Grotesk({ subsets: ["latin"], weight: ["500"], display: "swap", variable: "--font-label" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -59,7 +73,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#00253e",
+  themeColor: "#041826",
   width: "device-width",
   initialScale: 1,
 };
