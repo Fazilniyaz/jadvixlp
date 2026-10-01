@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import HomeFaq from "@/components/HomeFaq";
@@ -109,24 +110,35 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{
           __html: `
         .hz-hero-wrap{position:relative;padding:12px 16px 0}
-        .hz-hero-frame{border-radius:var(--r-hero);border:1px solid var(--line-navy);min-height:min(84dvh,820px);display:flex;flex-direction:column;justify-content:center;padding:96px 24px 150px}
-        .hz-shaft{position:absolute;left:50%;top:-30%;width:min(900px,120%);height:120%;transform:translateX(-50%);background:radial-gradient(ellipse 38% 60% at 50% 0%,rgba(31,166,224,.36),rgba(31,166,224,.1) 55%,transparent 75%);pointer-events:none}
-        .hz-hero-inner{position:relative;max-width:980px;margin:0 auto;text-align:center}
-        .hz-meta{position:absolute;left:0;right:0;bottom:30px;width:min(700px,calc(100% - 640px));display:flex;justify-content:space-between;gap:24px;margin:0 auto}
+        .hz-hero-frame{border-radius:var(--r-hero);border:1px solid var(--line-navy);min-height:min(86dvh,820px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px}
+        .hz-shaft{position:absolute;left:-12%;top:-35%;width:70%;height:110%;background:radial-gradient(ellipse 50% 55% at 40% 35%,rgba(31,166,224,.26),transparent 70%);pointer-events:none}
+        .hz-hero-copy{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;padding:88px 0 170px clamp(24px,4.5vw,64px)}
+        .hz-navy-eyebrow,.hz-hero-eyebrow{align-self:flex-start;color:var(--brand)!important;margin-bottom:26px}
+        .hz-hero-h1{margin:0;font-family:var(--font-display),system-ui,sans-serif;font-size:clamp(52px,6vw,88px);line-height:1.02;font-weight:600;letter-spacing:-.03em;word-spacing:.06em;color:#fff;text-wrap:balance}
+        .hz-meta{position:absolute;left:clamp(24px,4.5vw,64px);right:0;bottom:64px;display:flex;flex-wrap:wrap;gap:14px 40px;margin:0}
         .hz-meta-item dt{color:var(--on-navy-2);font-size:11.5px}
         .hz-meta-item dd{margin:6px 0 0;font-family:var(--font-display),system-ui,sans-serif;font-size:17px;font-weight:500;color:#fff;word-spacing:.06em}
+        .hz-photo{position:relative;min-height:100%;overflow:hidden;animation:hz-photo-in 1.1s var(--ease) both;animation-delay:.15s}
+        .hz-photo-media{position:absolute;inset:0}
+        .hz-photo::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,var(--navy-900) 0%,rgba(4,24,38,.55) 14%,transparent 38%)}
+        .hz-photo::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border:1px solid rgba(255,255,255,.08);border-left:0;border-radius:0 calc(var(--r-hero) - 1px) calc(var(--r-hero) - 1px) 0}
+        @keyframes hz-photo-in{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:none}}
+        @supports (animation-timeline: scroll()){
+          .hz-photo-media{animation:hz-parallax linear both;animation-timeline:scroll(root);animation-range:0 100vh}
+          @keyframes hz-parallax{from{transform:scale(1)}to{transform:scale(1.06) translateY(2%)}}
+        }
         .hz-float{position:absolute;bottom:-44px;z-index:2}
         .hz-float-l{left:48px}
         .hz-float-r{right:48px}
-        .hz-glass{margin:0;display:flex;align-items:center;gap:14px;padding:16px 20px;border:1px solid var(--line);border-radius:var(--r-card);background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:var(--shadow-md)}
-        .hz-glass-col{flex-direction:column;align-items:stretch;width:236px;gap:12px}
+        .hz-glass{margin:0;display:flex;align-items:center;gap:14px;padding:16px 20px;border:1px solid var(--line);border-radius:var(--r-card);background:var(--surface);box-shadow:var(--shadow-md)}
+        .hz-glass-col{flex-direction:column;align-items:stretch;width:228px;gap:12px}
         .hz-glass figcaption{display:flex;flex-direction:column}
         .hz-glass-num{font-size:28px;font-weight:600;line-height:1;color:var(--ink);letter-spacing:-.02em}
         .hz-glass-label{font-size:11px;color:var(--ink-2);margin-top:6px}
-        .hz-glass-col .hz-glass-label{margin-top:0}
+        .hz-glass-col .hz-glass-label{margin-top:0;margin-bottom:6px}
         .hz-strip{overflow:hidden;padding:84px 0 12px;opacity:.7;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-        @media(max-width:1060px){.hz-meta{position:relative;left:auto;right:auto;bottom:auto;width:auto;margin:48px auto 0;max-width:640px}.hz-hero-frame{padding-bottom:110px}}
-        @media(max-width:640px){.hz-hero-wrap{padding:8px 10px 0}.hz-hero-frame{padding:64px 20px 96px;min-height:0}.hz-meta{flex-wrap:wrap;justify-content:center;gap:18px 28px;text-align:center}.hz-float{bottom:-44px;width:calc(50% - 22px)}.hz-float-l{left:16px}.hz-float-r{right:16px}.hz-glass{padding:12px 14px;gap:10px;min-height:96px}.hz-glass>svg{width:36px;height:36px;flex-shrink:0}.hz-glass-col{width:auto;gap:8px}.hz-glass-col>svg{width:100%;height:18px}.hz-glass-num{font-size:22px}.hz-glass-label{font-size:10px;letter-spacing:.1em}}
+        @media(max-width:960px){.hz-hero-frame{grid-template-columns:1fr;gap:0;min-height:0}.hz-hero-copy{padding:72px 28px 40px}.hz-meta{position:relative;left:auto;right:auto;bottom:auto;margin-top:44px}.hz-photo{min-height:340px}.hz-photo::before{background:linear-gradient(180deg,var(--navy-900) 0%,transparent 34%)}.hz-photo::after{border-left:1px solid rgba(255,255,255,.08);border-top:0;border-radius:0 0 calc(var(--r-hero) - 1px) calc(var(--r-hero) - 1px)}}
+        @media(max-width:640px){.hz-hero-wrap{padding:8px 10px 0}.hz-hero-copy{padding:56px 20px 32px}.hz-photo{min-height:300px}.hz-meta{gap:16px 26px}.hz-float{bottom:-44px;width:calc(50% - 22px)}.hz-float-l{left:16px}.hz-float-r{right:16px}.hz-glass{padding:12px 14px;gap:10px;min-height:96px}.hz-glass>svg{width:34px;height:34px;flex-shrink:0}.hz-glass-col{width:auto;gap:8px}.hz-glass-col>svg{width:100%;height:16px}.hz-glass-num{font-size:22px}.hz-glass-label{font-size:10px;letter-spacing:.1em}}
         .hz-svc-feature{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px}
         .hz-svc3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:20px}
         .hz-prodgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
@@ -134,8 +146,6 @@ export default function HomePage() {
         .hz-stats2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
         .hz-contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start}
         .hz-feature-split{display:flex;height:100%}
-        .hz-h1-line{white-space:nowrap}
-        @media(max-width:560px){.hz-h1-line{white-space:normal}}
         .hz-contactlink{transition:color .25s var(--ease)}
         .hz-contactlink:hover{color:var(--accent-text)!important}
         .hz-contactlink:hover .hz-ci{border-color:var(--brand)}
@@ -146,81 +156,92 @@ export default function HomePage() {
         }}
       />
 
-      {/* ============ HERO (contained frame) ============ */}
+      {/* ============ HERO (contained split: copy left, workspace photo right) ============ */}
       <section className="hz-hero-wrap">
         <div className="jx-navy hz-hero-frame">
           <div aria-hidden className="hz-shaft" />
-          <div className="hz-hero-inner">
-            <h1 className="jx-display-xl" style={{ color: "#fff" }}>
+          <div className="hz-hero-copy">
+            {/* <span className="jx-eyebrow hz-hero-eyebrow jx-rise">Your Vision • Our Expertise</span> */}
+            <h1 className="hz-hero-h1">
               {HERO_LINES.map((line, li) => (
                 <span key={li}>
                   {li > 0 && <br />}
-                  <span className="hz-h1-line">
-                    {line.map((w, wi) => {
-                      const idx = wordIndex++;
-                      return (
-                        <span key={w}>
-                          {wi > 0 && " "}
-                          <span className={`jx-word${w === "Secure." ? " jx-accent" : ""}`} style={{ ["--i" as string]: idx } as CSSProperties}>
-                            {w}
-                          </span>
+                  {line.map((w, wi) => {
+                    const idx = wordIndex++;
+                    return (
+                      <span key={w}>
+                        {wi > 0 && " "}
+                        <span className={`jx-word${w === "Secure." ? " jx-accent" : ""}`} style={{ ["--i" as string]: idx } as CSSProperties}>
+                          {w}
                         </span>
-                      );
-                    })}
-                  </span>
+                      </span>
+                    );
+                  })}
                 </span>
               ))}
             </h1>
-            <p className="jx-body-lg jx-rise" style={{ ["--d" as string]: "420ms", maxWidth: 600, margin: "28px auto 0", color: "var(--on-navy-2)" } as CSSProperties}>
+            <p className="jx-body-lg jx-rise" style={{ ["--d" as string]: "460ms", maxWidth: 560, margin: "26px 0 0", color: "var(--on-navy-2)" } as CSSProperties}>
               Jadvix builds scalable websites, apps and digital experiences from the UK and India — reliable engineering fused with creative, conversion-focused design.
             </p>
-            <div className="jx-rise" style={{ ["--d" as string]: "540ms", display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 36 } as CSSProperties}>
-              <Link href="/contact" className="jx-btn jx-btn-spark">
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 34 }}>
+              <Link href="/contact" className="jx-btn jx-btn-spark jx-rise" style={{ ["--d" as string]: "540ms" } as CSSProperties}>
                 Get a Free Project Quote <ArrowUpRight />
               </Link>
-              <Link href="/services" className="jx-btn jx-btn-ghost">
+              <Link href="/services" className="jx-btn jx-btn-ghost jx-rise" style={{ ["--d" as string]: "620ms" } as CSSProperties}>
                 Explore Our Work
               </Link>
             </div>
+
+            {/* bottom meta row, restyled from the existing stat strip */}
+            {/* <dl className="hz-meta jx-rise" style={{ ["--d" as string]: "700ms" } as CSSProperties}>
+              {[["Offices", "UK · India"], ["Delivery", "100% In-House"], ["Products", "4 Built In-House"]].map(([k, v]) => (
+                <div key={k} className="hz-meta-item">
+                  <dt className="jx-label">+ {k}</dt>
+                  <dd>{v}</dd>
+                </div>
+              ))}
+            </dl> */}
           </div>
 
-          {/* corner meta-labels, restyled from the existing stat strip */}
-          <dl className="hz-meta jx-rise" style={{ ["--d" as string]: "660ms" } as CSSProperties}>
-            {[["Offices", "UK · India"], ["Delivery", "100% In-House"], ["Products", "4 Built In-House"]].map(([k, v]) => (
-              <div key={k} className="hz-meta-item">
-                <dt className="jx-label">+ {k}</dt>
-                <dd>{v}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="hz-photo">
+            <div className="hz-photo-media">
+              <Image
+                src="/hero-jadvix.webp"
+                alt="Jadvix work displayed on laptop, phone and mug"
+                fill
+                priority
+                sizes="(max-width: 960px) 160vw, 1600px"
+                style={{ objectFit: "cover", objectPosition: "72% 55%" }}
+              />
+            </div>
+          </div>
         </div>
 
-        {/* floating glass cards overlapping the frame's lower corners (existing stats only) */}
-        <div className="hz-float hz-float-l jx-rise" style={{ ["--d" as string]: "760ms" } as CSSProperties}>
+        {/* floating cards overlapping the frame's lower corners (existing stats only) */}
+        {/* <div className="hz-float hz-float-l jx-rise" style={{ ["--d" as string]: "860ms" } as CSSProperties}>
           <figure className="hz-glass jx-float" style={{ ["--fd" as string]: "0s" } as CSSProperties}>
-            <svg width="52" height="52" viewBox="0 0 52 52" aria-hidden>
-              <circle cx="26" cy="26" r="21" fill="none" stroke="var(--line)" strokeWidth="4" />
-              <circle cx="26" cy="26" r="21" fill="none" stroke="var(--brand)" strokeWidth="4" strokeLinecap="round" />
-              <path d="M19 26.5l4.5 4.5 9-9.5" fill="none" stroke="var(--accent-text)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            <svg width="48" height="48" viewBox="0 0 52 52" aria-hidden>
+              <circle cx="26" cy="26" r="21" fill="none" stroke="var(--brand)" strokeWidth="3.5" />
+              <path d="M19 26.5l4.5 4.5 9-9.5" fill="none" stroke="var(--accent-text)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <figcaption>
               <span className="font-display jx-num hz-glass-num">{STATS[2].value}</span>
               <span className="jx-label hz-glass-label">{STATS[2].label}</span>
             </figcaption>
           </figure>
-        </div>
-        <div className="hz-float hz-float-r jx-rise" style={{ ["--d" as string]: "860ms" } as CSSProperties}>
+        </div> */}
+        <div className="hz-float hz-float-r jx-rise" style={{ ["--d" as string]: "960ms" } as CSSProperties}>
           <figure className="hz-glass hz-glass-col jx-float" style={{ ["--fd" as string]: "-3s" } as CSSProperties}>
-            <figcaption>
+            {/* <figcaption>
               <span className="jx-label hz-glass-label">{STATS[1].label}</span>
               <span className="font-display jx-num hz-glass-num">{STATS[1].value}</span>
-            </figcaption>
-            {/* unit chart: one cell per service discipline */}
-            <svg width="100%" height="22" viewBox="0 0 176 22" preserveAspectRatio="xMinYMid meet" aria-hidden>
+            </figcaption> */}
+            {/* unit strip: one block per service discipline */}
+            {/* <svg width="100%" height="18" viewBox="0 0 176 18" preserveAspectRatio="xMinYMid meet" aria-hidden>
               {Array.from({ length: 8 }).map((_, i) => (
-                <rect key={i} x={i * 22} y={0} width={18} height={22} rx={5} fill="var(--brand)" fillOpacity={0.35 + i * 0.09} />
+                <rect key={i} x={i * 22} y={0} width={18} height={18} rx={4.5} fill="var(--brand)" fillOpacity={0.35 + i * 0.09} />
               ))}
-            </svg>
+            </svg> */}
           </figure>
         </div>
       </section>
