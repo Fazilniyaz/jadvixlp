@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  poweredByHeader: false,
-  compress: true,
-};
+   const nextConfig = {
+     output: 'export',
+     images: { unoptimized: true },
+   };
 
 export default nextConfig;

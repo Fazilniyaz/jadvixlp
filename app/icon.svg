@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 0 770 654">
+<!-- Jadvix mark only, cropped from jadvix-logo.svg (square, centred, wordmark clipped). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="44 -63 790 790">
+<defs><clipPath id="jm"><rect x="0" y="0" width="824" height="654"/></clipPath></defs>
+<g clip-path="url(#jm)">
 <g transform="translate(0,654) scale(0.1,-0.1)" fill="#040707" stroke="none"><path d="M12690 4620 c-80 -8 -123 -24 -155 -60 -11 -12 -37 -29 -57 -37 -21
 -8 -40 -24 -44 -35 -3 -10 -19 -34 -35 -52 -15 -18 -37 -53 -48 -78 -11 -26
 -37 -60 -60 -78 -24 -20 -45 -48 -52 -69 -6 -20 -23 -49 -38 -66 -15 -16 -32
@@ -310,4 +313,5 @@ m1020 -125 c5 -7 12 -22 14 -33 2 -16 -3 -20 -22 -20 -21 0 -26 5 -28 33 -3
 -5 16 -11z m-96 -79 c0 -5 -5 -10 -11 -10 -5 0 -7 5 -4 10 3 6 8 10 11 10 2 0
 4 -4 4 -10z m-86 -86 c18 -7 21 -41 6 -64 -7 -12 -13 -12 -27 -4 -22 14 -29
 54 -11 65 16 11 13 10 32 3z"/></g>
+</g>
 </svg>

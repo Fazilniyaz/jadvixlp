@@ -1,32 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
-import { Space_Grotesk } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import "@fontsource-variable/funnel-display";
+import Header from "@/components/site/Header";
+import Footer from "@/components/site/Footer";
+import Motion from "@/components/site/Motion";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
-// Display: Clash Display (Fontshare, self-hosted), headings only, 500–600.
-const display = localFont({
-  src: [
-    { path: "./fonts/ClashDisplay-Medium.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/ClashDisplay-Semibold.woff2", weight: "600", style: "normal" },
-  ],
-  display: "swap",
-  variable: "--font-display",
-});
-// Body/UI: Satoshi (Fontshare, self-hosted).
-const body = localFont({
-  src: [
-    { path: "./fonts/Satoshi-Regular.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/Satoshi-Medium.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/Satoshi-Bold.woff2", weight: "700", style: "normal" },
-  ],
-  display: "swap",
-  variable: "--font-body",
-});
-// Micro-labels / eyebrows only.
-const label = Space_Grotesk({ subsets: ["latin"], weight: ["500"], display: "swap", variable: "--font-label" });
+// Body/UI: Plus Jakarta Sans. Display: Funnel Display, self-hosted via fontsource (see --ff-h).
+const body = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap", variable: "--font-body" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -73,7 +55,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#041826",
+  themeColor: "#0d0d0d",
   width: "device-width",
   initialScale: 1,
 };
@@ -117,33 +99,31 @@ const websiteJsonLd = {
   url: SITE.url,
 };
 
+// Runs before paint: apply the saved theme (dark by default) and arm the motion initial
+// states. If the motion engine never boots, the class is dropped so nothing stays hidden.
+const bootScript = `(function(){var d=document.documentElement;try{d.dataset.theme=localStorage.getItem('jx-theme')||'dark'}catch(e){d.dataset.theme='dark'}if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('motion');setTimeout(function(){if(!window.__motionReady)d.classList.remove('motion')},4000)}})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${display.variable} ${body.variable} ${label.variable}`}>
+    <html lang="en" data-theme="dark" suppressHydrationWarning className={body.variable}>
       <body>
-        {/* No-flash theme init: apply saved theme before paint */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('jx-theme')||'light';document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='light';}`,
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[400] focus:rounded-lg focus:bg-black focus:px-4 focus:py-2 focus:text-white"
         >
           Skip to content
         </a>
+        <div className="curtain" aria-hidden>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/jadvix-logo-light.svg" alt="" />
+        </div>
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <Motion />
       </body>
     </html>
   );

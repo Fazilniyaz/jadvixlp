@@ -11,6 +11,8 @@ export const SITE = {
   offices: {
     uk: {
       title: "UK Office",
+      city: "Ruislip",
+      timeZone: "Europe/London",
       lines: ["2nd Floor, College House", "17 King Edwards Rd, Ruislip", "United Kingdom, HA4 7AE"],
       phone: "+44 7355 803386",
       phoneHref: "tel:+447355803386",
@@ -18,6 +20,8 @@ export const SITE = {
     },
     india: {
       title: "India Office",
+      city: "Chennai",
+      timeZone: "Asia/Kolkata",
       lines: ["No 19/35, 1st Floor, Mount Road", "Little Mount, Saidapet, Chennai", "Tamil Nadu, India, 600 015"],
       phone: "+91 94896 44108",
       phoneHref: "tel:+919489644108",
@@ -28,10 +32,11 @@ export const SITE = {
 
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/products", label: "Products" },
-  { href: "/ideas", label: "Ideas" },
-  { href: "/about", label: "About" },
+  { href: "/team", label: "Team" },
+  { href: "/careers", label: "Careers" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ] as const;
